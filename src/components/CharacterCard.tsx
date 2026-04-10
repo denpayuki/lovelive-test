@@ -20,9 +20,15 @@ const dimensionLabels: { key: keyof CharacterProfile['dimensions']; label: strin
 
 export default function CharacterCard({ character, rank, percentage, showDimensions }: CharacterCardProps) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all hover:shadow-md">
+    <div
+      className="bg-ivory rounded-2xl overflow-hidden transition-all duration-300 hover:translate-y-[-2px]"
+      style={{
+        border: '1px solid #f0eee6',
+        boxShadow: 'rgba(0,0,0,0.05) 0px 4px 24px',
+      }}
+    >
       {/* Image area */}
-      <div className="relative aspect-square bg-gray-50 flex items-center justify-center overflow-hidden">
+      <div className="relative aspect-square bg-parchment flex items-center justify-center overflow-hidden">
         <img
           src={`/images/characters/${character.imageFile}`}
           alt={character.nameJa}
@@ -34,47 +40,58 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
             if (parent && !parent.querySelector('.placeholder')) {
               const div = document.createElement('div');
               div.className = 'placeholder flex flex-col items-center justify-center w-full h-full';
-              div.innerHTML = `<span class="text-4xl mb-2">${character.nameJa.charAt(0)}</span><span class="text-sm text-gray-400">立绘待添加</span>`;
+              div.innerHTML = `<span class="text-4xl mb-2 text-near-black">${character.nameJa.charAt(0)}</span><span class="text-sm text-stone-gray">立绘待添加</span>`;
               parent.appendChild(div);
             }
           }}
         />
         {rank && (
-          <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-sm font-bold text-gray-700 shadow-sm">
+          <div
+            className="absolute top-3 left-3 w-8 h-8 rounded-full bg-ivory/90 backdrop-blur-sm flex items-center justify-center text-sm font-medium text-near-black"
+            style={{ boxShadow: '0px 0px 0px 1px #e8e6dc' }}
+          >
             {rank}
           </div>
         )}
         {percentage !== undefined && (
-          <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-medium text-gray-700 shadow-sm">
+          <div
+            className="absolute top-3 right-3 px-3 py-1 rounded-full bg-ivory/90 backdrop-blur-sm text-sm font-medium text-terracotta"
+            style={{ boxShadow: '0px 0px 0px 1px #e8e6dc' }}
+          >
             {percentage}%
           </div>
         )}
       </div>
 
       {/* Info */}
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-800">{character.nameJa}</h3>
-        <div className="flex items-center gap-2 mt-1 mb-3">
+      <div className="p-5">
+        <h3 className="font-serif-display text-lg text-near-black" style={{ lineHeight: 1.20 }}>
+          {character.nameJa}
+        </h3>
+        <div className="flex items-center gap-2 mt-1.5 mb-3">
           <span
             className="inline-block w-2.5 h-2.5 rounded-full"
             style={{ backgroundColor: character.unitColor }}
           />
-          <span className="text-sm text-gray-500">{character.unit}</span>
+          <span className="text-sm text-olive-gray">{character.unit}</span>
         </div>
-        <p className="text-sm text-gray-600 leading-relaxed">{character.description}</p>
+        <p className="text-sm text-olive-gray" style={{ lineHeight: 1.60 }}>{character.description}</p>
 
         {showDimensions && (
-          <div className="mt-4 space-y-2">
+          <div className="mt-5 pt-4 space-y-2.5" style={{ borderTop: '1px solid #f0eee6' }}>
             {dimensionLabels.map(({ key, label }) => (
               <div key={key} className="flex items-center gap-2 text-xs">
-                <span className="w-16 text-gray-500 shrink-0">{label}</span>
-                <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                <span className="w-16 text-stone-gray shrink-0">{label}</span>
+                <div className="flex-1 h-1.5 bg-border-cream rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-rose-300 to-sky-300 rounded-full"
-                    style={{ width: `${character.dimensions[key] * 10}%` }}
+                    className="h-full bg-terracotta rounded-full"
+                    style={{
+                      width: `${character.dimensions[key] * 10}%`,
+                      opacity: 0.5 + (character.dimensions[key] / 10) * 0.5,
+                    }}
                   />
                 </div>
-                <span className="w-5 text-right text-gray-400">{character.dimensions[key]}</span>
+                <span className="w-5 text-right text-stone-gray">{character.dimensions[key]}</span>
               </div>
             ))}
           </div>

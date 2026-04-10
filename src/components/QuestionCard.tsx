@@ -12,10 +12,10 @@ interface QuestionCardProps {
 export default function QuestionCard({ question, questionIndex, total, value, onChange }: QuestionCardProps) {
   return (
     <div className="w-full max-w-xl mx-auto">
-      <div className="text-sm text-gray-400 mb-2">
+      <div className="text-sm text-stone-gray mb-2">
         Q{questionIndex + 1} / {total}
       </div>
-      <h2 className="text-lg sm:text-xl font-medium text-gray-800 mb-8 leading-relaxed">
+      <h2 className="font-serif-display text-xl sm:text-2xl text-near-black mb-8" style={{ lineHeight: 1.30 }}>
         {question.text}
       </h2>
       <LikertScale value={value} onChange={onChange} />
