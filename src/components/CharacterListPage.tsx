@@ -22,17 +22,25 @@ export default function CharacterListPage() {
     <div className="min-h-screen px-4 py-8">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">角色一览</h1>
-            <p className="text-sm text-gray-500 mt-1">シャイニーカラーズ 全28人</p>
-          </div>
+        <div className="mb-8">
           <button
             onClick={() => navigate('/')}
-            className="px-5 py-2 text-sm rounded-full bg-gray-800 text-white hover:bg-gray-700 transition-colors cursor-pointer"
+            className="text-sm text-gray-400 hover:text-gray-600 transition-colors cursor-pointer flex items-center gap-1 mb-4"
           >
-            开始测试
+            ← 返回首页
           </button>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">角色一览</h1>
+              <p className="text-sm text-gray-500 mt-1">シャイニーカラーズ 全28人</p>
+            </div>
+            <button
+              onClick={() => navigate('/')}
+              className="px-5 py-2 text-sm rounded-full bg-gray-800 text-white hover:bg-gray-700 transition-colors cursor-pointer"
+            >
+              开始测试
+            </button>
+          </div>
         </div>
 
         {/* Units */}

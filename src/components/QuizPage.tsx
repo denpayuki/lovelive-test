@@ -92,6 +92,17 @@ export default function QuizPage() {
     <div className="min-h-screen flex flex-col px-4 py-8">
       {/* Header */}
       <div className="max-w-xl mx-auto w-full mb-8">
+        <div className="flex items-center justify-between mb-3">
+          <button
+            onClick={handleRestart}
+            className="text-sm text-gray-400 hover:text-gray-600 transition-colors cursor-pointer flex items-center gap-1"
+          >
+            ← 返回首页
+          </button>
+          <span className="text-sm text-gray-400">
+            {answeredCount}/{questions.length}
+          </span>
+        </div>
         <ProgressBar current={answeredCount} total={questions.length} />
       </div>
 
