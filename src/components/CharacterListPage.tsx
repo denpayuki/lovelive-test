@@ -66,18 +66,31 @@ export default function CharacterListPage() {
                 <span className="text-sm text-stone-gray">{unitCharacters.length}人</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {unitCharacters.map((char) => (
-                  <div
-                    key={char.id}
-                    onClick={() => setExpandedId(expandedId === char.id ? null : char.id)}
-                    className="cursor-pointer"
-                  >
-                    <CharacterCard
-                      character={char}
-                      showDimensions={expandedId === char.id}
-                    />
-                  </div>
-                ))}
+                {unitCharacters.map((char) => {
+                  const isExpanded = expandedId === char.id;
+                  return (
+                    <div
+                      key={char.id}
+                      role="button"
+                      tabIndex={0}
+                      aria-expanded={isExpanded}
+                      aria-label={`${char.nameJa} — ${isExpanded ? '收起' : '展开'}维度详情`}
+                      onClick={() => setExpandedId(isExpanded ? null : char.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setExpandedId(isExpanded ? null : char.id);
+                        }
+                      }}
+                      className="cursor-pointer rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3898ec] focus-visible:ring-offset-2 focus-visible:ring-offset-parchment"
+                    >
+                      <CharacterCard
+                        character={char}
+                        showDimensions={isExpanded}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </section>
           );

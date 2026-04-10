@@ -1,3 +1,5 @@
+import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend, ResponsiveContainer } from 'recharts';
 import type { MatchResult, DimensionKey } from '../types';
 import { dimensions } from '../data/dimensions';
@@ -7,7 +9,8 @@ import CharacterCard from './CharacterCard';
 interface ResultPageProps {
   results: MatchResult[];
   answers: Record<number, number>;
-  onRestart: () => void;
+  confirmingReset: boolean;
+  onConfirmReset: () => void;
 }
 
 const dimensionOrder: DimensionKey[] = [
@@ -15,10 +18,31 @@ const dimensionOrder: DimensionKey[] = [
   'openness', 'discipline', 'authenticity', 'optimism',
 ];
 
-export default function ResultPage({ results, answers, onRestart }: ResultPageProps) {
+export default function ResultPage({ results, answers, confirmingReset, onConfirmReset }: ResultPageProps) {
+  const navigate = useNavigate();
   const top3 = results.slice(0, 3);
   const best = top3[0];
   const userScores = calculateDimensionScores(answers);
+  const [shareState, setShareState] = useState<'idle' | 'copied'>('idle');
+
+  const handleShare = useCallback(async () => {
+    const text = `我在闪耀色彩性格测试中匹配到了 ${best.character.nameJa}，相似度 ${best.percentage}%！`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: '闪耀色彩性格测试结果', text });
+      } else {
+        await navigator.clipboard.writeText(text);
+        setShareState('copied');
+        setTimeout(() => setShareState('idle'), 2000);
+      }
+    } catch {
+      try {
+        await navigator.clipboard.writeText(text);
+        setShareState('copied');
+        setTimeout(() => setShareState('idle'), 2000);
+      } catch { /* user denied */ }
+    }
+  }, [best]);
 
   const radarData = dimensionOrder.map((key) => {
     const meta = dimensions.find((d) => d.key === key)!;
@@ -42,8 +66,8 @@ export default function ResultPage({ results, answers, onRestart }: ResultPagePr
             <p className="text-olive-gray" style={{ lineHeight: 1.60 }}>与你最相似的闪耀色彩角色</p>
           </div>
 
-          <div className="mb-10 animate-fade-in-up stagger-2">
-            <div className="text-center mb-5">
+          <div className="mb-10">
+            <div className="text-center mb-5 animate-fade-in-up stagger-2">
               <span
                 className="inline-block px-4 py-1.5 bg-ivory text-terracotta rounded-full text-sm font-medium"
                 style={{ boxShadow: '#f0eee6 0px 0px 0px 0px, #e8e6dc 0px 0px 0px 1px' }}
@@ -51,7 +75,7 @@ export default function ResultPage({ results, answers, onRestart }: ResultPagePr
                 最佳匹配
               </span>
             </div>
-            <div className="max-w-sm mx-auto">
+            <div className="max-w-sm mx-auto animate-scale-in stagger-3">
               <CharacterCard
                 character={best.character}
                 rank={1}
@@ -72,7 +96,7 @@ export default function ResultPage({ results, answers, onRestart }: ResultPagePr
             <ResponsiveContainer width="100%" height={350}>
               <RadarChart data={radarData}>
                 <PolarGrid stroke="#4d4c48" />
-                <PolarAngleAxis dataKey="dimension" tick={{ fontSize: 12, fill: '#b0aea5' }} />
+                <PolarAngleAxis dataKey="dimension" tick={{ fontSize: 14, fill: '#b0aea5' }} />
                 <PolarRadiusAxis angle={90} domain={[0, 10]} tick={{ fontSize: 10, fill: '#87867f' }} />
                 <Radar
                   name="你"
@@ -150,13 +174,36 @@ export default function ResultPage({ results, answers, onRestart }: ResultPagePr
           </div>
 
           {/* Actions */}
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex justify-center gap-3">
+              <button
+                onClick={handleShare}
+                className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-sm font-medium hover:opacity-90 transition-all cursor-pointer"
+                style={{ boxShadow: '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px' }}
+              >
+                {shareState === 'copied' ? '已复制到剪贴板' : '分享结果'}
+              </button>
+              <button
+                onClick={onConfirmReset}
+                className={`px-8 py-3 rounded-xl text-sm font-medium hover:opacity-90 transition-all cursor-pointer ${
+                  confirmingReset
+                    ? 'bg-[#b53333] text-ivory'
+                    : 'bg-dark-surface text-ivory'
+                }`}
+                style={{
+                  boxShadow: confirmingReset
+                    ? '#b53333 0px 0px 0px 0px, #b53333 0px 0px 0px 1px'
+                    : '#30302e 0px 0px 0px 0px, #30302e 0px 0px 0px 1px'
+                }}
+              >
+                {confirmingReset ? '确认清除？' : '重新测试'}
+              </button>
+            </div>
             <button
-              onClick={onRestart}
-              className="px-8 py-3 bg-dark-surface text-ivory rounded-xl text-sm font-medium hover:opacity-90 transition-all cursor-pointer"
-              style={{ boxShadow: '#30302e 0px 0px 0px 0px, #30302e 0px 0px 0px 1px' }}
+              onClick={() => navigate('/characters')}
+              className="text-sm text-stone-gray hover:text-dark-warm transition-colors cursor-pointer"
             >
-              重新测试
+              查看所有角色 →
             </button>
           </div>
         </div>
