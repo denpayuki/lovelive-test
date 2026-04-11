@@ -101,6 +101,13 @@ npm run build     # Output → dist/
 npm run preview   # Preview the production build locally
 ```
 
+### Deployment
+
+This project can be deployed to any static hosting platform. Step-by-step guides:
+
+- [Deploy to Cloudflare Pages](./docs/cloudflare-pages-deploy.md)
+- [Deploy to Vercel](./docs/vercel-deploy.md)
+
 ---
 
 ## ✦ Project Structure
