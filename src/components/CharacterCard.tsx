@@ -46,6 +46,7 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
           <img
             src={character.imageUrl}
             alt={`${character.nameJa}`}
+            crossOrigin="anonymous"
             className="w-full h-full object-cover object-top"
             onError={() => setImgError(true)}
           />
