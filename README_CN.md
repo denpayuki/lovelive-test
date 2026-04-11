@@ -118,13 +118,16 @@ shiny-mbti/
 │   │   ├── ProgressBar.tsx     # 答题进度条
 │   │   ├── ResultPage.tsx      # 结果页（含雷达图）
 │   │   ├── CharacterCard.tsx   # 角色信息卡片
-│   │   └── CharacterListPage.tsx  # 浏览全部 28 位角色
+│   │   ├── CharacterListPage.tsx  # 浏览全部 28 位角色
+│   │   └── ThemeToggle.tsx     # 深色/浅色模式切换按钮
 │   ├── data/            # 静态数据
 │   │   ├── characters.ts       # 28 位角色资料和维度分数
 │   │   ├── questions.ts        # 35 道测试题目
 │   │   └── dimensions.ts       # 8 个维度定义
 │   ├── utils/
 │   │   └── matching.ts         # 评分和欧氏距离匹配算法
+│   ├── contexts/
+│   │   └── ThemeContext.tsx     # 深色/浅色模式上下文
 │   ├── types/
 │   │   └── index.ts            # TypeScript 类型定义
 │   ├── App.tsx          # 路由配置

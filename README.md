@@ -117,13 +117,16 @@ shiny-mbti/
 │   │   ├── ProgressBar.tsx     # Quiz progress indicator
 │   │   ├── ResultPage.tsx      # Results with radar chart
 │   │   ├── CharacterCard.tsx   # Character info card
-│   │   └── CharacterListPage.tsx  # Browse all 28 characters
+│   │   ├── CharacterListPage.tsx  # Browse all 28 characters
+│   │   └── ThemeToggle.tsx     # Dark/light mode toggle button
 │   ├── data/            # Static data
 │   │   ├── characters.ts       # 28 character profiles & dimension scores
 │   │   ├── questions.ts        # 35 quiz questions
 │   │   └── dimensions.ts       # 8 dimension definitions
 │   ├── utils/
 │   │   └── matching.ts         # Scoring & Euclidean distance matching
+│   ├── contexts/
+│   │   └── ThemeContext.tsx     # Dark/light mode context & provider
 │   ├── types/
 │   │   └── index.ts            # TypeScript type definitions
 │   ├── App.tsx          # Router setup

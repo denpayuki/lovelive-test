@@ -22,7 +22,7 @@ ShinyColors (闪耀色彩) personality quiz — a React SPA that matches users t
 
 ## Architecture
 
-**Routing** (`App.tsx`): Two routes only — `/` (QuizPage) and `/characters` (CharacterListPage).
+**Routing** (`App.tsx`): Two routes only — `/` (QuizPage) and `/characters` (CharacterListPage). Wrapped in `ThemeProvider` with a global `ThemeToggle` for dark/light mode.
 
 **Data layer** (`src/data/`):
 - `characters.ts` — 28 character profiles, each with 8-dimension scores (1-10 scale), unit affiliation, and unit color
@@ -33,11 +33,14 @@ ShinyColors (闪耀色彩) personality quiz — a React SPA that matches users t
 - User answers (1-7 Likert) → per-dimension averages → linear mapping to 1-10 scale
 - Euclidean distance between user vector and each character vector → sorted results with similarity percentage
 
+**Theme** (`src/contexts/ThemeContext.tsx`): React context providing dark/light mode toggle, persisted state. `ThemeToggle` component renders a global switch.
+
 **Component flow**:
 - `QuizPage` manages quiz state (current index, answers map, results) — renders landing screen → question flow → `ResultPage`
 - `ResultPage` shows top-3 matches with a recharts RadarChart comparing user vs best match
 - `CharacterListPage` groups all 28 characters by unit with expandable dimension bars
 - `LikertScale` renders 7 graduated circle buttons (7=agree → 1=disagree) with color coding (rose for agree, sky for disagree)
+- `ProgressBar` shows quiz completion progress; `QuestionCard` wraps individual question display; `CharacterCard` renders character info in the list page
 
 **Types** (`src/types/index.ts`): `DimensionScores`, `CharacterProfile`, `Question`, `DimensionMeta`, `MatchResult`.
 
