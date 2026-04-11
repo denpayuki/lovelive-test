@@ -39,9 +39,9 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
           </div>
         ) : (
           <img
-            src={`/images/characters/${character.imageFile}`}
+            src={character.imageUrl}
             alt={`${character.nameJa} 角色立绘`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
             onError={() => setImgError(true)}
           />
         )}

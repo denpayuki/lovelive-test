@@ -18,7 +18,7 @@ export interface CharacterProfile {
   unit: string;
   unitColor: string;
   description: string;
-  imageFile: string;
+  imageUrl: string;
   dimensions: DimensionScores;
 }
 

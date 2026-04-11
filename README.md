@@ -1,179 +1,184 @@
-# ShinyColors Personality Quiz
+<div align="center">
+
+# ✦ ShinyColors Personality Quiz ✦
+
+### *Which ShinyColors idol are you?*
+
+[![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-ef9421?logo=creativecommons&logoColor=white)](./LICENSE)
 
 **[中文文档](./README_CN.md)**
 
-A web-based personality quiz that matches you with one of the 28 idols from **THE iDOLM@STER: Shiny Colors** based on an 8-dimension personality model.
+<br/>
 
-## What Is This?
+A web-based personality quiz that matches you with one of the 28 idols from<br/>**THE iDOLM@STER: Shiny Colors** based on an 8-dimension personality model.
 
-This is a fun personality test inspired by the characters of ShinyColors (シャイニーカラーズ). You answer 35 questions about your personality, and the app calculates which idol you are most similar to using an 8-dimension matching algorithm.
+</div>
+
+---
+
+## ✦ What Is This?
+
+A fun personality test inspired by the characters of ShinyColors (シャイニーカラーズ). Answer **35 questions** about your personality, and the app calculates which idol you're most similar to using an **8-dimension matching algorithm** with Euclidean distance scoring.
 
 ### The 8 Personality Dimensions
 
 | Dimension | What It Measures |
-|-----------|-----------------|
-| Extraversion | Social energy — do you recharge around people or alone? |
-| Emotional Stability | Stress resilience — do you stay calm under pressure? |
-| Assertiveness | Leadership drive — do you speak up and take charge? |
-| Warmth | Caring tendency — do you prioritize others' needs? |
-| Openness | Curiosity — do you enjoy exploring new ideas? |
-| Discipline | Self-control — do you set goals and stick to them? |
-| Authenticity | True-to-self — do you show the same face everywhere? |
-| Optimism | Outlook — do you tend to see the bright side? |
+|:--|:--|
+| **Extraversion** | Social energy — do you recharge around people or alone? |
+| **Emotional Stability** | Stress resilience — do you stay calm under pressure? |
+| **Assertiveness** | Leadership drive — do you speak up and take charge? |
+| **Warmth** | Caring tendency — do you prioritize others' needs? |
+| **Openness** | Curiosity — do you enjoy exploring new ideas? |
+| **Discipline** | Self-control — do you set goals and stick to them? |
+| **Authenticity** | True-to-self — do you show the same face everywhere? |
+| **Optimism** | Outlook — do you tend to see the bright side? |
 
-### All 8 Units (28 Characters)
+### All 8 Units — 28 Characters
 
-- **illumination STARS** — Mano, Hiori, Meguru
-- **L'Antica** — Kogane, Sakuya, Mamimi, Yuika, Kiriko
-- **ALSTROEMERIA** — Amana, Tenka, Chiyuki
-- **Houkago Climax Girls** — Kaho, Chiyoko, Juri, Rinze, Natsuha
-- **Straylight** — Asahi, Fuyuko, Mei
-- **noctchill** — Toru, Madoka, Koito, Hinana
-- **SHHis** — Nichika, Mikoto
-- **CoMETIK** — Ruka, Hana, Haruki
+> | Unit | Members |
+> |:--|:--|
+> | **illumination STARS** | Mano · Hiori · Meguru |
+> | **L'Antica** | Kogane · Sakuya · Mamimi · Yuika · Kiriko |
+> | **ALSTROEMERIA** | Amana · Tenka · Chiyuki |
+> | **Houkago Climax Girls** | Kaho · Chiyoko · Juri · Rinze · Natsuha |
+> | **Straylight** | Asahi · Fuyuko · Mei |
+> | **noctchill** | Toru · Madoka · Koito · Hinana |
+> | **SHHis** | Nichika · Mikoto |
+> | **CoMETIK** | Ruka · Hana · Haruki |
 
-## Getting Started
+---
+
+## ✦ Features
+
+- **35 Likert-scale questions** with an intuitive 7-point agree/disagree selector
+- **8-dimension personality profiling** — goes beyond simple type categories
+- **Euclidean distance matching** against 28 hand-scored character profiles
+- **Top 3 results** with percentage-based similarity scores
+- **Radar chart comparison** — visualize your profile vs. your best match
+- **Character encyclopedia** — browse all 28 characters by unit with expandable dimension bars
+- **Dark / Light mode** — automatic persistence across sessions
+- **Fully responsive** — works on mobile, tablet, and desktop
+- **Chinese-language UI** with Japanese character names
+
+---
+
+## ✦ Getting Started
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) version 18 or higher
-- [npm](https://www.npmjs.com/) (comes bundled with Node.js)
+- [Node.js](https://nodejs.org/) version 18+
+- [npm](https://www.npmjs.com/) (bundled with Node.js)
 
-> **How to check:** Open a terminal (Command Prompt on Windows, Terminal on Mac/Linux) and type:
-> ```bash
-> node -v
-> npm -v
-> ```
-> If you see version numbers, you're good to go. If not, download Node.js from the link above.
+> **How to check:** Run `node -v && npm -v` in your terminal. If you see version numbers, you're all set.
 
 ### Installation
 
-1. **Download the project**
+```bash
+# 1. Clone the repo
+git clone https://github.com/YOUR_USERNAME/shiny-mbti.git
 
-   Click the green "Code" button on GitHub, then "Download ZIP" and unzip it. Or if you have Git installed:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/shiny-mbti.git
-   ```
+# 2. Navigate into the project
+cd shiny-mbti
 
-2. **Open a terminal in the project folder**
+# 3. Install dependencies
+npm install
 
-   Navigate to the folder you just downloaded:
-   ```bash
-   cd shiny-mbti
-   ```
-
-3. **Install dependencies**
-
-   This downloads all the libraries the project needs:
-   ```bash
-   npm install
-   ```
-
-4. **Start the development server**
-
-   ```bash
-   npm run dev
-   ```
-
-5. **Open in your browser**
-
-   After running the command above, you'll see a URL in the terminal (usually `http://localhost:5173`). Open it in your browser and start the quiz!
-
-### Adding Character Images
-
-The quiz works without images, but it looks much better with them. Place character portrait images in:
-
-```
-public/images/characters/
+# 4. Start the dev server
+npm run dev
 ```
 
-See `public/images/characters/IMAGE_NAMING.md` for the exact file naming format. Images should be PNG format, ideally 512×512 or larger.
-
-> **Important:** Character images from THE iDOLM@STER: Shiny Colors are copyrighted by Bandai Namco Entertainment. They are **NOT** included in this repository. See the [Copyright Notice](#copyright-notice) section below.
+Open `http://localhost:5173` in your browser and start the quiz!
 
 ### Building for Production
 
-To create an optimized build for deployment:
-
 ```bash
-npm run build
+npm run build     # Output → dist/
+npm run preview   # Preview the production build locally
 ```
 
-The output will be in the `dist/` folder. You can preview it locally with:
+---
 
-```bash
-npm run preview
-```
-
-## Project Structure
+## ✦ Project Structure
 
 ```
 shiny-mbti/
 ├── src/
-│   ├── components/      # React UI components
-│   │   ├── QuizPage.tsx        # Main quiz flow (landing → questions → results)
-│   │   ├── QuestionCard.tsx    # Single question display
-│   │   ├── LikertScale.tsx     # 7-point agree/disagree selector
-│   │   ├── ProgressBar.tsx     # Quiz progress indicator
-│   │   ├── ResultPage.tsx      # Results with radar chart
-│   │   ├── CharacterCard.tsx   # Character info card
-│   │   ├── CharacterListPage.tsx  # Browse all 28 characters
-│   │   └── ThemeToggle.tsx     # Dark/light mode toggle button
-│   ├── data/            # Static data
-│   │   ├── characters.ts       # 28 character profiles & dimension scores
-│   │   ├── questions.ts        # 35 quiz questions
-│   │   └── dimensions.ts       # 8 dimension definitions
-│   ├── utils/
-│   │   └── matching.ts         # Scoring & Euclidean distance matching
-│   ├── contexts/
-│   │   └── ThemeContext.tsx     # Dark/light mode context & provider
-│   ├── types/
-│   │   └── index.ts            # TypeScript type definitions
-│   ├── App.tsx          # Router setup
-│   ├── main.tsx         # Entry point
-│   └── index.css        # Global styles & Tailwind import
-├── public/              # Static assets
-│   └── images/characters/  # Character portrait images (not included)
-├── index.html           # HTML entry point
-├── vite.config.ts       # Vite configuration
-├── package.json         # Dependencies & scripts
-└── tsconfig.json        # TypeScript configuration
+│   ├── components/          # React UI components
+│   │   ├── QuizPage.tsx           Landing → questions → results flow
+│   │   ├── ResultPage.tsx         Top matches + radar chart
+│   │   ├── CharacterCard.tsx      Character info card
+│   │   ├── CharacterListPage.tsx  Browse all 28 characters
+│   │   ├── QuestionCard.tsx       Single question display
+│   │   ├── LikertScale.tsx        7-point selector
+│   │   ├── ProgressBar.tsx        Quiz progress indicator
+│   │   └── ThemeToggle.tsx        Dark/light mode switch
+│   ├── data/                # Static data
+│   │   ├── characters.ts         28 character profiles & scores
+│   │   ├── questions.ts          35 quiz questions
+│   │   └── dimensions.ts         8 dimension definitions
+│   ├── utils/matching.ts    # Scoring & Euclidean distance
+│   ├── contexts/ThemeContext.tsx
+│   ├── types/index.ts
+│   ├── App.tsx              # Router setup
+│   └── index.css            # Tailwind + global styles
+├── public/                  # Static assets
+├── index.html
+└── vite.config.ts
 ```
 
-## Tech Stack
+---
 
-- **React 19** — UI framework
-- **TypeScript** — Type safety
-- **Vite** — Build tool & dev server
-- **Tailwind CSS v4** — Utility-first styling
-- **Recharts** — Radar chart visualization
-- **React Router v7** — Client-side routing
+## ✦ Tech Stack
 
-## Copyright Notice
+<table>
+  <tr>
+    <td align="center"><img src="https://img.shields.io/badge/-React_19-61dafb?style=flat-square&logo=react&logoColor=white" /></td>
+    <td>UI framework</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://img.shields.io/badge/-TypeScript_6-3178c6?style=flat-square&logo=typescript&logoColor=white" /></td>
+    <td>Type safety</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://img.shields.io/badge/-Vite_8-646cff?style=flat-square&logo=vite&logoColor=white" /></td>
+    <td>Build tool & dev server</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://img.shields.io/badge/-Tailwind_CSS_4-06b6d4?style=flat-square&logo=tailwindcss&logoColor=white" /></td>
+    <td>Utility-first styling</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://img.shields.io/badge/-Recharts-ff7300?style=flat-square&logo=data:image/svg+xml;base64,&logoColor=white" /></td>
+    <td>Radar chart visualization</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://img.shields.io/badge/-React_Router_7-ca4245?style=flat-square&logo=reactrouter&logoColor=white" /></td>
+    <td>Client-side routing</td>
+  </tr>
+</table>
+
+---
+
+## ✦ Copyright Notice
 
 ### Code
 
-The source code of this project is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license. See the [LICENSE](./LICENSE) file for details.
+The source code of this project is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license. See [LICENSE](./LICENSE) for details.
 
 ### Character IP
 
 **THE iDOLM@STER: Shiny Colors** and all related characters, names, and artwork are the property of **Bandai Namco Entertainment Inc.**
 
-Character images/illustrations are **NOT** included in this repository and must be sourced separately. If you use character images, you must comply with Bandai Namco's guidelines and terms of use.
-
 This is a fan-made project and is not affiliated with, endorsed by, or sponsored by Bandai Namco Entertainment Inc.
 
-## License
+---
 
-This work is licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)**.
+<div align="center">
 
-This means you are free to:
-- **Share** — copy and redistribute the material
-- **Adapt** — remix, transform, and build upon the material
+Made with ♥ for Producers everywhere
 
-Under the following terms:
-- **Attribution** — You must give appropriate credit and link back to this project
-- **NonCommercial** — You may not use the material for commercial purposes
-- **ShareAlike** — If you remix or build upon this project, you must distribute your contributions under the same license
-
-See [LICENSE](./LICENSE) for the full license text.
+</div>

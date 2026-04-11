@@ -44,7 +44,7 @@ ShinyColors (闪耀色彩) personality quiz — a React SPA that matches users t
 
 **Types** (`src/types/index.ts`): `DimensionScores`, `CharacterProfile`, `Question`, `DimensionMeta`, `MatchResult`.
 
-**Character images**: Expected at `/images/characters/{imageFile}` — fallback shows first kanji of name when image is missing.
+**Character images**: Hosted on Cloudflare R2 (`assets.sallyn.top`), each character's `imageUrl` field holds the full URL. Fallback shows first kanji of name when image fails to load.
 
 ## Design Style
 
