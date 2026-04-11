@@ -79,7 +79,7 @@
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/YOUR_USERNAME/shiny-mbti.git
+git clone https://github.com/Sallyn0225/shiny-mbti.git
 
 # 2. 进入项目目录
 cd shiny-mbti

@@ -79,7 +79,7 @@ A fun personality test inspired by the characters of ShinyColors (シャイニ�
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/YOUR_USERNAME/shiny-mbti.git
+git clone https://github.com/Sallyn0225/shiny-mbti.git
 
 # 2. Navigate into the project
 cd shiny-mbti
