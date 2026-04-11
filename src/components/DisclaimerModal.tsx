@@ -39,7 +39,7 @@ export default function DisclaimerModal({ open, onClose }: DisclaimerModalProps)
         <button
           onClick={onClose}
           aria-label={t('disclaimer.close')}
-          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-stone-gray dark:text-warm-silver hover:text-near-black dark:hover:text-ivory transition-colors cursor-pointer"
+          className="absolute top-3 right-3 w-11 h-11 flex items-center justify-center rounded-full text-stone-gray dark:text-warm-silver hover:text-near-black dark:hover:text-ivory hover:bg-parchment dark:hover:bg-near-black transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3898ec]"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="6" x2="6" y2="18" />

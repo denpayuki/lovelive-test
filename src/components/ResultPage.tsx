@@ -159,8 +159,8 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
                 <Radar
                   name={userLabel}
                   dataKey={userLabel}
-                  stroke="#c96442"
-                  fill="#c96442"
+                  stroke="#b45535"
+                  fill="#b45535"
                   fillOpacity={0.2}
                   strokeWidth={2}
                 />
@@ -241,7 +241,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
                 onClick={() => setNicknameModalOpen(true)}
                 disabled={exporting}
                 className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-sm font-medium hover:opacity-90 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ boxShadow: '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px' }}
+                style={{ boxShadow: '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px' }}
               >
                 {exporting ? t('export.exporting') : t('export.button')}
               </button>
@@ -263,7 +263,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
             </div>
             <button
               onClick={() => navigate('/characters')}
-              className="text-sm text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory transition-colors cursor-pointer"
+              className="text-sm text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory transition-colors cursor-pointer py-2 px-3"
             >
               {t('result.viewAll')}
             </button>

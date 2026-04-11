@@ -10,7 +10,7 @@ export default function ThemeToggle() {
     <button
       onClick={toggleTheme}
       aria-label={isDark ? t('theme.light') : t('theme.dark')}
-      className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer bg-warm-sand dark:bg-dark-surface text-charcoal-warm dark:text-warm-silver transition-colors hover:opacity-80"
+      className="w-11 h-11 rounded-full flex items-center justify-center cursor-pointer bg-warm-sand dark:bg-dark-surface text-charcoal-warm dark:text-warm-silver transition-colors hover:opacity-80"
       style={{ boxShadow: 'var(--btn-secondary-ring)' }}
     >
       {isDark ? (

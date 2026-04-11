@@ -27,7 +27,7 @@ export default function CharacterListPage() {
         <div className="mb-10">
           <button
             onClick={() => navigate('/')}
-            className="text-sm text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory transition-colors cursor-pointer flex items-center gap-1 mb-5"
+            className="text-sm text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory transition-colors cursor-pointer flex items-center gap-1 mb-5 py-2 px-3 -ml-3"
           >
             {t('charList.back')}
           </button>
@@ -43,7 +43,7 @@ export default function CharacterListPage() {
             <button
               onClick={() => navigate('/')}
               className="px-5 py-2.5 text-sm rounded-lg bg-terracotta text-ivory hover:opacity-90 transition-all cursor-pointer"
-              style={{ boxShadow: '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px' }}
+              style={{ boxShadow: '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px' }}
             >
               {t('charList.start')}
             </button>

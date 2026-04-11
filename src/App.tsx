@@ -24,7 +24,7 @@ function TopBar() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
-          className="h-10 flex items-center gap-1.5 px-3 rounded-full bg-warm-sand dark:bg-dark-surface text-charcoal-warm dark:text-warm-silver hover:opacity-80 transition-colors"
+          className="h-11 flex items-center gap-1.5 px-3 rounded-full bg-warm-sand dark:bg-dark-surface text-charcoal-warm dark:text-warm-silver hover:opacity-80 transition-colors"
           style={{ boxShadow: 'var(--btn-secondary-ring)' }}
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -37,7 +37,7 @@ function TopBar() {
         <button
           onClick={() => setDisclaimerOpen(true)}
           aria-label={t('topbar.about')}
-          className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer bg-warm-sand dark:bg-dark-surface text-charcoal-warm dark:text-warm-silver transition-colors hover:opacity-80"
+          className="w-11 h-11 rounded-full flex items-center justify-center cursor-pointer bg-warm-sand dark:bg-dark-surface text-charcoal-warm dark:text-warm-silver transition-colors hover:opacity-80"
           style={{ boxShadow: 'var(--btn-secondary-ring)' }}
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -8,7 +8,7 @@ interface LikertScaleProps {
 }
 
 const optionMeta: { value: number; labelKey: TranslationKey; size: string; bg: string }[] = [
-  { value: 7, labelKey: 'likert.7', size: 'w-9 h-9 sm:w-12 sm:h-12', bg: '#c96442' },
+  { value: 7, labelKey: 'likert.7', size: 'w-9 h-9 sm:w-12 sm:h-12', bg: '#b45535' },
   { value: 6, labelKey: 'likert.6', size: 'w-8 h-8 sm:w-10 sm:h-10', bg: '#d97757' },
   { value: 5, labelKey: 'likert.5', size: 'w-7 h-7 sm:w-9 sm:h-9', bg: '#e0a08a' },
   { value: 4, labelKey: 'likert.4', size: 'w-6 h-6 sm:w-8 sm:h-8', bg: '#d1cfc5' },

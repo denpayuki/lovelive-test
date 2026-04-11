@@ -184,7 +184,7 @@ export default function QuizPage() {
                 <button
                   onClick={handleResume}
                   className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-base font-medium hover:opacity-90 transition-all cursor-pointer"
-                  style={{ boxShadow: '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px' }}
+                  style={{ boxShadow: '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px' }}
                 >
                   {savedCount >= questions.length ? t('landing.viewResults') : t('landing.resume')}
                 </button>
@@ -192,7 +192,7 @@ export default function QuizPage() {
               <div className="animate-fade-in stagger-4 mt-8">
                 <button
                   onClick={handleConfirmReset}
-                  className={`text-sm transition-colors cursor-pointer ${
+                  className={`text-sm transition-colors cursor-pointer py-2 px-3 -mx-3 ${
                     confirmingReset
                       ? 'text-[#b53333] font-medium'
                       : 'text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory'
@@ -211,7 +211,7 @@ export default function QuizPage() {
                 <button
                   onClick={() => setStarted(true)}
                   className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-base font-medium hover:opacity-90 transition-all cursor-pointer"
-                  style={{ boxShadow: '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px' }}
+                  style={{ boxShadow: '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px' }}
                 >
                   {t('landing.start')}
                 </button>
@@ -219,7 +219,7 @@ export default function QuizPage() {
               <div className="animate-fade-in stagger-4 mt-8">
                 <button
                   onClick={() => navigate('/characters')}
-                  className="text-sm text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory transition-colors cursor-pointer"
+                  className="text-sm text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory transition-colors cursor-pointer py-2 px-3 -mx-3"
                 >
                   {t('landing.browseCharacters')}
                 </button>
@@ -270,7 +270,7 @@ export default function QuizPage() {
                 setShowMilestone(null);
               }}
               className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-base font-medium hover:opacity-90 transition-all cursor-pointer"
-              style={{ boxShadow: '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px' }}
+              style={{ boxShadow: '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px' }}
             >
               {t('milestone.continue')}
             </button>
@@ -288,7 +288,7 @@ export default function QuizPage() {
         <div className="flex items-center justify-between mb-3">
           <button
             onClick={handleConfirmReset}
-            className={`text-sm transition-colors cursor-pointer flex items-center gap-1 ${
+            className={`text-sm transition-colors cursor-pointer flex items-center gap-1 py-2 px-3 -ml-3 ${
               confirmingReset
                 ? 'text-[#b53333] font-medium'
                 : 'text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory'
@@ -337,7 +337,7 @@ export default function QuizPage() {
           }`}
           style={{
             boxShadow: isLastQuestion && allAnswered
-              ? '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px'
+              ? '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px'
               : 'var(--btn-dark-ring)'
           }}
         >

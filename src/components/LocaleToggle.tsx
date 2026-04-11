@@ -40,7 +40,7 @@ export default function LocaleToggle() {
         onClick={() => setOpen((v) => !v)}
         aria-label={t('lang.label')}
         aria-expanded={open}
-        className="h-10 flex items-center gap-1.5 px-3 rounded-full bg-warm-sand dark:bg-dark-surface text-charcoal-warm dark:text-warm-silver hover:opacity-80 transition-colors cursor-pointer"
+        className="h-11 flex items-center gap-1.5 px-3 rounded-full bg-warm-sand dark:bg-dark-surface text-charcoal-warm dark:text-warm-silver hover:opacity-80 transition-colors cursor-pointer"
         style={{ boxShadow: 'var(--btn-secondary-ring)' }}
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -60,9 +60,9 @@ export default function LocaleToggle() {
             <button
               key={opt.value}
               onClick={() => { setLocale(opt.value); setOpen(false); }}
-              className={`w-full px-4 py-2.5 text-sm text-left transition-colors cursor-pointer ${
+              className={`w-full px-4 py-3 text-sm text-left transition-colors cursor-pointer ${
                 opt.value === locale
-                  ? 'text-terracotta font-medium bg-parchment dark:bg-dark-warm'
+                  ? 'text-terracotta font-medium bg-ivory dark:bg-dark-warm'
                   : 'text-charcoal-warm dark:text-warm-silver hover:bg-parchment dark:hover:bg-dark-warm'
               }`}
             >
