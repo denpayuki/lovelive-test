@@ -60,9 +60,10 @@ A fun personality test inspired by the characters of ShinyColors (シャイニ�
 - **Top 3 results** with percentage-based similarity scores
 - **Radar chart comparison** — visualize your profile vs. your best match
 - **Character encyclopedia** — browse all 28 characters by unit with expandable dimension bars
+- **Result image export** — save and share your result as a shareable PNG card
+- **Trilingual UI** — Chinese, English, and Japanese with auto-detection
 - **Dark / Light mode** — automatic persistence across sessions
 - **Fully responsive** — works on mobile, tablet, and desktop
-- **Chinese-language UI** with Japanese character names
 
 ---
 
@@ -110,17 +111,28 @@ shiny-mbti/
 │   ├── components/          # React UI components
 │   │   ├── QuizPage.tsx           Landing → questions → results flow
 │   │   ├── ResultPage.tsx         Top matches + radar chart
+│   │   ├── ExportCard.tsx         Shareable result card (off-screen)
+│   │   ├── ExportPreviewModal.tsx Export preview & download modal
+│   │   ├── NicknameModal.tsx      Nickname input before export
 │   │   ├── CharacterCard.tsx      Character info card
 │   │   ├── CharacterListPage.tsx  Browse all 28 characters
 │   │   ├── QuestionCard.tsx       Single question display
 │   │   ├── LikertScale.tsx        7-point selector
 │   │   ├── ProgressBar.tsx        Quiz progress indicator
-│   │   └── ThemeToggle.tsx        Dark/light mode switch
+│   │   ├── ThemeToggle.tsx        Dark/light mode switch
+│   │   ├── LocaleToggle.tsx       Language switcher (zh/en/ja)
+│   │   └── DisclaimerModal.tsx    About / disclaimer dialog
+│   ├── i18n/                # Internationalization
+│   │   ├── index.tsx             LocaleProvider & useLocale hook
+│   │   ├── questions.ts          Translated question text
+│   │   └── locales/              zh.ts · en.ts · ja.ts
 │   ├── data/                # Static data
 │   │   ├── characters.ts         28 character profiles & scores
 │   │   ├── questions.ts          35 quiz questions
 │   │   └── dimensions.ts         8 dimension definitions
-│   ├── utils/matching.ts    # Scoring & Euclidean distance
+│   ├── utils/
+│   │   ├── matching.ts           Scoring & Euclidean distance
+│   │   └── exportImage.ts        DOM-to-PNG capture utilities
 │   ├── contexts/ThemeContext.tsx
 │   ├── types/index.ts
 │   ├── App.tsx              # Router setup
@@ -158,6 +170,10 @@ shiny-mbti/
   <tr>
     <td align="center"><img src="https://img.shields.io/badge/-React_Router_7-ca4245?style=flat-square&logo=reactrouter&logoColor=white" /></td>
     <td>Client-side routing</td>
+  </tr>
+  <tr>
+    <td align="center"><img src="https://img.shields.io/badge/-modern--screenshot-333?style=flat-square" /></td>
+    <td>Result image export</td>
   </tr>
 </table>
 

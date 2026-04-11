@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-ShinyColors (闪耀色彩) personality quiz — a React SPA that matches users to one of 28 idolmaster ShinyColors characters via an 8-dimension personality model (35 Likert-scale questions). Chinese-language UI with Japanese character names.
+ShinyColors (闪耀色彩) personality quiz — a React SPA that matches users to one of 28 idolmaster ShinyColors characters via an 8-dimension personality model (35 Likert-scale questions). Trilingual UI (Chinese/English/Japanese) with Japanese character names.
 
 ## Commands
 
@@ -19,10 +19,11 @@ ShinyColors (闪耀色彩) personality quiz — a React SPA that matches users t
 - Tailwind CSS v4 (via `@tailwindcss/vite` plugin, imported as `@import "tailwindcss"` in index.css)
 - react-router-dom v7 (BrowserRouter)
 - recharts (radar chart on result page)
+- modern-screenshot (result image export)
 
 ## Architecture
 
-**Routing** (`App.tsx`): Two routes only — `/` (QuizPage) and `/characters` (CharacterListPage). Wrapped in `ThemeProvider` with a global `ThemeToggle` for dark/light mode.
+**Routing** (`App.tsx`): Two routes — `/` (QuizPage) and `/characters` (CharacterListPage, lazy-loaded with `Suspense`). Wrapped in `ThemeProvider` → `LocaleProvider`. A fixed `TopBar` renders GitHub link, disclaimer button, locale toggle, and theme toggle.
 
 **Data layer** (`src/data/`):
 - `characters.ts` — 28 character profiles, each with 8-dimension scores (1-10 scale), unit affiliation, and unit color
@@ -33,18 +34,24 @@ ShinyColors (闪耀色彩) personality quiz — a React SPA that matches users t
 - User answers (1-7 Likert) → per-dimension averages → linear mapping to 1-10 scale
 - Euclidean distance between user vector and each character vector → sorted results with similarity percentage
 
-**Theme** (`src/contexts/ThemeContext.tsx`): React context providing dark/light mode toggle, persisted state. `ThemeToggle` component renders a global switch.
+**i18n** (`src/i18n/`): Lightweight context-based i18n supporting zh/en/ja. `LocaleProvider` wraps the app; `useLocale()` returns `{ locale, setLocale, t }`. Translation keys are defined in `src/i18n/locales/zh.ts` (canonical), with `en.ts` and `ja.ts` as translations. Question text is in `src/i18n/questions.ts`. All user-facing strings must use `t('key')` — no hardcoded text.
+
+**Theme** (`src/contexts/ThemeContext.tsx`): React context providing dark/light mode toggle, persisted to localStorage.
+
+**Export feature** (`src/utils/exportImage.ts`, `ExportCard.tsx`, `ExportPreviewModal.tsx`, `NicknameModal.tsx`): Users can export their result as a shareable PNG image. `ExportCard` renders a styled off-screen card; `captureElement()` uses `modern-screenshot` (domToPng) to capture it. Character images are pre-fetched as data URLs to avoid CORS issues during capture.
 
 **Component flow**:
 - `QuizPage` manages quiz state (current index, answers map, results) — renders landing screen → question flow → `ResultPage`
-- `ResultPage` shows top-3 matches with a recharts RadarChart comparing user vs best match
+- `ResultPage` shows top-3 matches with a recharts RadarChart comparing user vs best match, plus export-to-image functionality
 - `CharacterListPage` groups all 28 characters by unit with expandable dimension bars
 - `LikertScale` renders 7 graduated circle buttons (7=agree → 1=disagree) with color coding (rose for agree, sky for disagree)
 - `ProgressBar` shows quiz completion progress; `QuestionCard` wraps individual question display; `CharacterCard` renders character info in the list page
 
 **Types** (`src/types/index.ts`): `DimensionScores`, `CharacterProfile`, `Question`, `DimensionMeta`, `MatchResult`.
 
-**Character images**: Hosted on Cloudflare R2 (`assets.sallyn.top`), each character's `imageUrl` field holds the full URL. Fallback shows first kanji of name when image fails to load.
+**Character images**: Hosted on Cloudflare R2 (`assets.sallyn.top`), each character's `imageUrl` field holds the full URL. Fallback shows first kanji of name when image fails to load. In dev mode, Vite proxies `/r2-assets` → `assets.sallyn.top` to bypass CORS.
+
+**Build optimization** (`vite.config.ts`): Manual chunks split react, react-router, and recharts/d3 into separate bundles.
 
 ## Design Style
 
