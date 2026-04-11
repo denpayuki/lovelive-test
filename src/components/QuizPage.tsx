@@ -1,9 +1,9 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { questions } from '../data/questions';
 import QuestionCard from './QuestionCard';
 import ProgressBar from './ProgressBar';
-import ResultPage from './ResultPage';
+const ResultPage = lazy(() => import('./ResultPage'));
 import { calculateDimensionScores, matchCharacters } from '../utils/matching';
 import { characters } from '../data/characters';
 import type { MatchResult } from '../types';
@@ -135,7 +135,7 @@ export default function QuizPage() {
 
   // Results view
   if (results) {
-    return <ResultPage results={results} answers={answers} confirmingReset={confirmingReset} onConfirmReset={handleConfirmReset} />;
+    return <Suspense><ResultPage results={results} answers={answers} confirmingReset={confirmingReset} onConfirmReset={handleConfirmReset} /></Suspense>;
   }
 
   // Landing / start screen

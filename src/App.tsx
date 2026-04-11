@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LocaleProvider } from './i18n';
 import { useLocale } from './i18n';
 import QuizPage from './components/QuizPage';
-import CharacterListPage from './components/CharacterListPage';
+const CharacterListPage = lazy(() => import('./components/CharacterListPage'));
 import ThemeToggle from './components/ThemeToggle';
 import LocaleToggle from './components/LocaleToggle';
 import DisclaimerModal from './components/DisclaimerModal';
@@ -17,7 +17,7 @@ function TopBar() {
 
   return (
     <>
-      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
+      <nav aria-label="Site navigation" className="fixed top-4 right-4 z-50 flex items-center gap-2">
         {/* GitHub badge */}
         <a
           href={GITHUB_URL}
@@ -52,7 +52,7 @@ function TopBar() {
 
         {/* Theme toggle */}
         <ThemeToggle />
-      </div>
+      </nav>
 
       <DisclaimerModal open={disclaimerOpen} onClose={() => setDisclaimerOpen(false)} />
     </>
@@ -65,10 +65,12 @@ export default function App() {
       <LocaleProvider>
         <BrowserRouter>
           <TopBar />
-          <Routes>
-            <Route path="/" element={<QuizPage />} />
-            <Route path="/characters" element={<CharacterListPage />} />
-          </Routes>
+          <main>
+            <Routes>
+              <Route path="/" element={<QuizPage />} />
+              <Route path="/characters" element={<Suspense><CharacterListPage /></Suspense>} />
+            </Routes>
+          </main>
         </BrowserRouter>
       </LocaleProvider>
     </ThemeProvider>
