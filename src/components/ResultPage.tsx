@@ -92,11 +92,11 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
           <h2 className="font-serif-display text-xl text-ivory mb-6 text-center" style={{ lineHeight: 1.20 }}>
             维度对比
           </h2>
-          <div className="rounded-2xl p-6" style={{ backgroundColor: '#30302e', border: '1px solid #30302e' }}>
+          <div className="rounded-2xl p-3 sm:p-6" style={{ backgroundColor: '#30302e', border: '1px solid #30302e' }}>
             <ResponsiveContainer width="100%" height={350}>
-              <RadarChart data={radarData}>
+              <RadarChart data={radarData} margin={{ top: 20, right: 35, bottom: 20, left: 35 }}>
                 <PolarGrid stroke="#4d4c48" />
-                <PolarAngleAxis dataKey="dimension" tick={{ fontSize: 14, fill: '#b0aea5' }} />
+                <PolarAngleAxis dataKey="dimension" tick={{ fontSize: 12, fill: '#b0aea5' }} />
                 <PolarRadiusAxis angle={90} domain={[0, 10]} tick={{ fontSize: 10, fill: '#87867f' }} />
                 <Radar
                   name="你"

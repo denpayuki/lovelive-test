@@ -6,13 +6,13 @@ interface LikertScaleProps {
 }
 
 const options = [
-  { value: 7, label: '完全认同', size: 'w-12 h-12', bg: '#c96442' },
-  { value: 6, label: '非常认同', size: 'w-10 h-10', bg: '#d97757' },
-  { value: 5, label: '比较认同', size: 'w-9 h-9', bg: '#e0a08a' },
-  { value: 4, label: '中立', size: 'w-8 h-8', bg: '#d1cfc5' },
-  { value: 3, label: '不太认同', size: 'w-9 h-9', bg: '#b0aea5' },
-  { value: 2, label: '非常不认同', size: 'w-10 h-10', bg: '#87867f' },
-  { value: 1, label: '完全不认同', size: 'w-12 h-12', bg: '#5e5d59' },
+  { value: 7, label: '完全认同', size: 'w-9 h-9 sm:w-12 sm:h-12', bg: '#c96442' },
+  { value: 6, label: '非常认同', size: 'w-8 h-8 sm:w-10 sm:h-10', bg: '#d97757' },
+  { value: 5, label: '比较认同', size: 'w-7 h-7 sm:w-9 sm:h-9', bg: '#e0a08a' },
+  { value: 4, label: '中立', size: 'w-6 h-6 sm:w-8 sm:h-8', bg: '#d1cfc5' },
+  { value: 3, label: '不太认同', size: 'w-7 h-7 sm:w-9 sm:h-9', bg: '#b0aea5' },
+  { value: 2, label: '非常不认同', size: 'w-8 h-8 sm:w-10 sm:h-10', bg: '#87867f' },
+  { value: 1, label: '完全不认同', size: 'w-9 h-9 sm:w-12 sm:h-12', bg: '#5e5d59' },
 ];
 
 export default function LikertScale({ value, onChange }: LikertScaleProps) {
@@ -61,7 +61,7 @@ export default function LikertScale({ value, onChange }: LikertScaleProps) {
               tabIndex={isSelected || (value === undefined && idx === 0) ? 0 : -1}
               onClick={() => onChange(opt.value)}
               onKeyDown={(e) => handleKeyDown(e, idx)}
-              className="flex items-center justify-center cursor-pointer w-11 h-11 sm:w-14 sm:h-14 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3898ec] focus-visible:ring-offset-2 focus-visible:ring-offset-parchment dark:focus-visible:ring-offset-near-black"
+              className="flex items-center justify-center cursor-pointer w-12 h-12 sm:w-14 sm:h-14 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3898ec] focus-visible:ring-offset-2 focus-visible:ring-offset-parchment dark:focus-visible:ring-offset-near-black"
               style={{ background: 'none', border: 'none', padding: 0 }}
             >
               <span
