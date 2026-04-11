@@ -1,10 +1,14 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend, ResponsiveContainer } from 'recharts';
 import type { MatchResult, DimensionKey } from '../types';
 import { dimensions } from '../data/dimensions';
 import { calculateDimensionScores } from '../utils/matching';
+import { captureElement, downloadBlob, fetchImageAsDataUrl } from '../utils/exportImage';
 import CharacterCard from './CharacterCard';
+import NicknameModal from './NicknameModal';
+import ExportCard from './ExportCard';
+import ExportPreviewModal from './ExportPreviewModal';
 import { useLocale } from '../i18n';
 import type { TranslationKey } from '../i18n';
 
@@ -48,28 +52,56 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
   const top3 = results.slice(0, 3);
   const best = top3[0];
   const userScores = calculateDimensionScores(answers);
-  const [shareState, setShareState] = useState<'idle' | 'copied'>('idle');
+  const [nicknameModalOpen, setNicknameModalOpen] = useState(false);
+  const [exporting, setExporting] = useState(false);
+  const [exportNickname, setExportNickname] = useState('');
+  const [charImageDataUrl, setCharImageDataUrl] = useState<string | undefined>(undefined);
+  const [previewImageUrl, setPreviewImageUrl] = useState<string | null>(null);
+  const exportCardRef = useRef<HTMLDivElement>(null);
 
   const userLabel = t('result.radarUser');
+  const dimensionLabels = dimensionOrder.map((key) => t(dimLabelKeys[key]));
 
-  const handleShare = useCallback(async () => {
-    const text = t('result.shareText', { name: best.character.nameJa, percentage: best.percentage });
+  const handleExportConfirm = useCallback(async (nickname: string) => {
+    setNicknameModalOpen(false);
+    setExporting(true);
+
+    // Fetch character image as data URL first (before mounting ExportCard)
+    let imgDataUrl: string | undefined;
     try {
-      if (navigator.share) {
-        await navigator.share({ title: t('result.shareTitle'), text });
-      } else {
-        await navigator.clipboard.writeText(text);
-        setShareState('copied');
-        setTimeout(() => setShareState('idle'), 2000);
-      }
+      imgDataUrl = await fetchImageAsDataUrl(best.character.imageUrl);
     } catch {
-      try {
-        await navigator.clipboard.writeText(text);
-        setShareState('copied');
-        setTimeout(() => setShareState('idle'), 2000);
-      } catch { /* user denied */ }
+      // CORS or network error — ExportCard will show fallback
     }
-  }, [best, t]);
+
+    // Now mount ExportCard with the image ready
+    setCharImageDataUrl(imgDataUrl);
+    setExportNickname(nickname);
+
+    // Wait for ExportCard to render with the image
+    await new Promise((r) => setTimeout(r, 400));
+
+    try {
+      if (!exportCardRef.current) throw new Error('ExportCard not mounted');
+      const blob = await captureElement(exportCardRef.current);
+      const url = URL.createObjectURL(blob);
+      setPreviewImageUrl(url);
+    } catch (err) {
+      console.error('Export failed:', err);
+    } finally {
+      setExporting(false);
+    }
+  }, [best]);
+
+  const handlePreviewDownload = useCallback(() => {
+    if (!previewImageUrl) return;
+    downloadBlob(previewImageUrl, `283-personality-${exportNickname}.png`);
+  }, [previewImageUrl, exportNickname]);
+
+  const handlePreviewClose = useCallback(() => {
+    if (previewImageUrl) URL.revokeObjectURL(previewImageUrl);
+    setPreviewImageUrl(null);
+  }, [previewImageUrl]);
 
   const radarData = dimensionOrder.map((key) => {
     return {
@@ -206,11 +238,12 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
           <div className="flex flex-col items-center gap-4">
             <div className="flex justify-center gap-3">
               <button
-                onClick={handleShare}
-                className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-sm font-medium hover:opacity-90 transition-all cursor-pointer"
+                onClick={() => setNicknameModalOpen(true)}
+                disabled={exporting}
+                className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-sm font-medium hover:opacity-90 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ boxShadow: '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px' }}
               >
-                {shareState === 'copied' ? t('result.copied') : t('result.share')}
+                {exporting ? t('export.exporting') : t('export.button')}
               </button>
               <button
                 onClick={onConfirmReset}
@@ -237,6 +270,39 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
           </div>
         </div>
       </div>
+
+      {/* Nickname modal */}
+      <NicknameModal
+        open={nicknameModalOpen}
+        onConfirm={handleExportConfirm}
+        onClose={() => setNicknameModalOpen(false)}
+      />
+
+      {/* Preview modal */}
+      <ExportPreviewModal
+        open={!!previewImageUrl}
+        imageUrl={previewImageUrl || ''}
+        filename={`283-personality-${exportNickname}.png`}
+        onDownload={handlePreviewDownload}
+        onClose={handlePreviewClose}
+      />
+
+      {/* Hidden export card */}
+      {(exporting || exportNickname) && (
+        <ExportCard
+          ref={exportCardRef}
+          nickname={exportNickname}
+          character={best.character}
+          userScores={userScores}
+          percentage={best.percentage}
+          dimensionLabels={dimensionLabels}
+          characterImageDataUrl={charImageDataUrl}
+          brandText={t('export.brand')}
+          headlineSuffix={t('export.headlineSuffix')}
+          similarityText={t('export.similarity', { name: best.character.nameJa, percentage: best.percentage })}
+          siteUrl={t('export.siteUrl')}
+        />
+      )}
     </div>
   );
 }

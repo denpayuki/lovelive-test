@@ -127,6 +127,21 @@ const ja: Record<TranslationKey, string> = {
   'dim.discipline.desc': '自律性：高い＝目標志向で勤勉、低い＝気ままで自由',
   'dim.authenticity.desc': '内面と外面の一致度：高い＝ありのまま、低い＝イメージを管理する',
   'dim.optimism.desc': '人生観：高い＝ポジティブで楽観的、低い＝現実的で慎重',
+
+  // Export image
+  'export.button': '画像を保存',
+  'export.exporting': '生成中...',
+  'export.nicknameTitle': 'ニックネームを入力',
+  'export.nicknamePlaceholder': 'あなたの名前',
+  'export.nicknameConfirm': '画像を生成',
+  'export.nicknameCancel': 'キャンセル',
+  'export.brand': '283パーソナリティ診断',
+  'export.headlineSuffix': 'の283パーソナリティは',
+  'export.similarity': '{name}との類似度は{percentage}%！あなたも試してみて！',
+  'export.siteUrl': '283ti.genchi.top',
+  'export.previewTitle': '画像プレビュー',
+  'export.previewDownload': '画像を保存',
+  'export.previewClose': '閉じる',
 };
 
 export default ja;

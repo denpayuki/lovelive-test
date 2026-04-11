@@ -125,6 +125,21 @@ const zh = {
   'dim.discipline.desc': '自律与目标导向：高分表示自律勤勉，低分表示随性自由',
   'dim.authenticity.desc': '外在与内在一致度：高分表示表里如一，低分表示善于伪装管理形象',
   'dim.optimism.desc': '人生态度：高分表示积极乐观，低分表示现实悲观',
+
+  // Export image
+  'export.button': '导出图片',
+  'export.exporting': '生成中...',
+  'export.nicknameTitle': '输入你的昵称',
+  'export.nicknamePlaceholder': '你的名字',
+  'export.nicknameConfirm': '生成图片',
+  'export.nicknameCancel': '取消',
+  'export.brand': '283人格测试',
+  'export.headlineSuffix': '的283人格是',
+  'export.similarity': '我和{name}的相似度为{percentage}%，你也来试试吧！',
+  'export.siteUrl': '283ti.genchi.top',
+  'export.previewTitle': '图片预览',
+  'export.previewDownload': '保存图片',
+  'export.previewClose': '关闭',
 } as const;
 
 export default zh;

@@ -127,6 +127,21 @@ const en: Record<TranslationKey, string> = {
   'dim.discipline.desc': 'Self-discipline: high = goal-oriented and diligent, low = spontaneous and free',
   'dim.authenticity.desc': 'Inner-outer alignment: high = genuine, low = image-conscious',
   'dim.optimism.desc': 'Life outlook: high = positive and hopeful, low = realistic and cautious',
+
+  // Export image
+  'export.button': 'Export Image',
+  'export.exporting': 'Generating...',
+  'export.nicknameTitle': 'Enter your nickname',
+  'export.nicknamePlaceholder': 'Your name',
+  'export.nicknameConfirm': 'Generate Image',
+  'export.nicknameCancel': 'Cancel',
+  'export.brand': '283 Personality Quiz',
+  'export.headlineSuffix': "'s 283 Personality",
+  'export.similarity': "My similarity to {name} is {percentage}% — try it too!",
+  'export.siteUrl': '283ti.genchi.top',
+  'export.previewTitle': 'Image Preview',
+  'export.previewDownload': 'Save Image',
+  'export.previewClose': 'Close',
 };
 
 export default en;
