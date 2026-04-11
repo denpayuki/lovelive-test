@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { LocaleProvider } from './i18n';
+import { useLocale } from './i18n';
 import QuizPage from './components/QuizPage';
 import CharacterListPage from './components/CharacterListPage';
 import ThemeToggle from './components/ThemeToggle';
+import LocaleToggle from './components/LocaleToggle';
 import DisclaimerModal from './components/DisclaimerModal';
 
 const GITHUB_URL = 'https://github.com/Sallyn0225/shiny-mbti';
 
 function TopBar() {
   const [disclaimerOpen, setDisclaimerOpen] = useState(false);
+  const { t } = useLocale();
 
   return (
     <>
@@ -32,7 +36,7 @@ function TopBar() {
         {/* Disclaimer button */}
         <button
           onClick={() => setDisclaimerOpen(true)}
-          aria-label="关于本项目"
+          aria-label={t('topbar.about')}
           className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer bg-warm-sand dark:bg-dark-surface text-charcoal-warm dark:text-warm-silver transition-colors hover:opacity-80"
           style={{ boxShadow: 'var(--btn-secondary-ring)' }}
         >
@@ -42,6 +46,9 @@ function TopBar() {
             <line x1="12" y1="8" x2="12.01" y2="8" />
           </svg>
         </button>
+
+        {/* Locale toggle */}
+        <LocaleToggle />
 
         {/* Theme toggle */}
         <ThemeToggle />
@@ -55,13 +62,15 @@ function TopBar() {
 export default function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
-        <TopBar />
-        <Routes>
-          <Route path="/" element={<QuizPage />} />
-          <Route path="/characters" element={<CharacterListPage />} />
-        </Routes>
-      </BrowserRouter>
+      <LocaleProvider>
+        <BrowserRouter>
+          <TopBar />
+          <Routes>
+            <Route path="/" element={<QuizPage />} />
+            <Route path="/characters" element={<CharacterListPage />} />
+          </Routes>
+        </BrowserRouter>
+      </LocaleProvider>
     </ThemeProvider>
   );
 }

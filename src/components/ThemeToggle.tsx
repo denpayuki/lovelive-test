@@ -1,13 +1,15 @@
 import { useTheme } from '../contexts/ThemeContext';
+import { useLocale } from '../i18n';
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const { t } = useLocale();
   const isDark = theme === 'dark';
 
   return (
     <button
       onClick={toggleTheme}
-      aria-label={isDark ? '切换到浅色模式' : '切换到深色模式'}
+      aria-label={isDark ? t('theme.light') : t('theme.dark')}
       className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer bg-warm-sand dark:bg-dark-surface text-charcoal-warm dark:text-warm-silver transition-colors hover:opacity-80"
       style={{ boxShadow: 'var(--btn-secondary-ring)' }}
     >

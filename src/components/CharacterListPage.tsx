@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { characters } from '../data/characters';
 import CharacterCard from './CharacterCard';
+import { useLocale } from '../i18n';
 
 const units = [
   'illumination STARS',
@@ -17,6 +18,7 @@ const units = [
 export default function CharacterListPage() {
   const navigate = useNavigate();
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const { t } = useLocale();
 
   return (
     <div className="min-h-screen px-4 py-8">
@@ -27,15 +29,15 @@ export default function CharacterListPage() {
             onClick={() => navigate('/')}
             className="text-sm text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory transition-colors cursor-pointer flex items-center gap-1 mb-5"
           >
-            ← 返回首页
+            {t('charList.back')}
           </button>
           <div className="flex items-center justify-between">
             <div>
               <h1 className="font-serif-display text-3xl sm:text-4xl text-near-black dark:text-ivory" style={{ lineHeight: 1.20 }}>
-                角色一览
+                {t('charList.title')}
               </h1>
               <p className="text-sm text-olive-gray dark:text-warm-silver mt-2" style={{ lineHeight: 1.60 }}>
-                シャイニーカラーズ 全28人
+                {t('charList.subtitle')}
               </p>
             </div>
             <button
@@ -43,7 +45,7 @@ export default function CharacterListPage() {
               className="px-5 py-2.5 text-sm rounded-lg bg-terracotta text-ivory hover:opacity-90 transition-all cursor-pointer"
               style={{ boxShadow: '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px' }}
             >
-              开始测试
+              {t('charList.start')}
             </button>
           </div>
         </div>
@@ -63,7 +65,9 @@ export default function CharacterListPage() {
                 <h2 className="font-serif-display text-xl text-near-black dark:text-ivory" style={{ lineHeight: 1.20 }}>
                   {unit}
                 </h2>
-                <span className="text-sm text-stone-gray dark:text-warm-silver">{unitCharacters.length}人</span>
+                <span className="text-sm text-stone-gray dark:text-warm-silver">
+                  {t('charList.count', { count: unitCharacters.length })}
+                </span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {unitCharacters.map((char) => {
@@ -74,7 +78,10 @@ export default function CharacterListPage() {
                       role="button"
                       tabIndex={0}
                       aria-expanded={isExpanded}
-                      aria-label={`${char.nameJa} — ${isExpanded ? '收起' : '展开'}维度详情`}
+                      aria-label={isExpanded
+                        ? t('charList.ariaCollapse', { name: char.nameJa })
+                        : t('charList.ariaExpand', { name: char.nameJa })
+                      }
                       onClick={() => setExpandedId(isExpanded ? null : char.id)}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {

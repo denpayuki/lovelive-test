@@ -5,6 +5,8 @@ import type { MatchResult, DimensionKey } from '../types';
 import { dimensions } from '../data/dimensions';
 import { calculateDimensionScores } from '../utils/matching';
 import CharacterCard from './CharacterCard';
+import { useLocale } from '../i18n';
+import type { TranslationKey } from '../i18n';
 
 interface ResultPageProps {
   results: MatchResult[];
@@ -18,18 +20,43 @@ const dimensionOrder: DimensionKey[] = [
   'openness', 'discipline', 'authenticity', 'optimism',
 ];
 
+const dimLabelKeys: Record<DimensionKey, TranslationKey> = {
+  extraversion: 'dim.extraversion',
+  emotionalStability: 'dim.emotionalStability',
+  assertiveness: 'dim.assertiveness',
+  warmth: 'dim.warmth',
+  openness: 'dim.openness',
+  discipline: 'dim.discipline',
+  authenticity: 'dim.authenticity',
+  optimism: 'dim.optimism',
+};
+
+const dimShortKeys: Record<DimensionKey, TranslationKey> = {
+  extraversion: 'dim.extraversion.short',
+  emotionalStability: 'dim.emotionalStability.short',
+  assertiveness: 'dim.assertiveness.short',
+  warmth: 'dim.warmth.short',
+  openness: 'dim.openness.short',
+  discipline: 'dim.discipline.short',
+  authenticity: 'dim.authenticity.short',
+  optimism: 'dim.optimism.short',
+};
+
 export default function ResultPage({ results, answers, confirmingReset, onConfirmReset }: ResultPageProps) {
   const navigate = useNavigate();
+  const { t } = useLocale();
   const top3 = results.slice(0, 3);
   const best = top3[0];
   const userScores = calculateDimensionScores(answers);
   const [shareState, setShareState] = useState<'idle' | 'copied'>('idle');
 
+  const userLabel = t('result.radarUser');
+
   const handleShare = useCallback(async () => {
-    const text = `我在闪耀色彩性格测试中匹配到了 ${best.character.nameJa}，相似度 ${best.percentage}%！`;
+    const text = t('result.shareText', { name: best.character.nameJa, percentage: best.percentage });
     try {
       if (navigator.share) {
-        await navigator.share({ title: '闪耀色彩性格测试结果', text });
+        await navigator.share({ title: t('result.shareTitle'), text });
       } else {
         await navigator.clipboard.writeText(text);
         setShareState('copied');
@@ -42,13 +69,12 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
         setTimeout(() => setShareState('idle'), 2000);
       } catch { /* user denied */ }
     }
-  }, [best]);
+  }, [best, t]);
 
   const radarData = dimensionOrder.map((key) => {
-    const meta = dimensions.find((d) => d.key === key)!;
     return {
-      dimension: meta.label,
-      你: userScores[key],
+      dimension: t(dimShortKeys[key]),
+      [userLabel]: userScores[key],
       [best.character.nameJa]: best.character.dimensions[key],
     };
   });
@@ -59,11 +85,11 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
       <div className="px-4 pt-12 pb-16">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12 animate-fade-in-up">
-            <p className="text-xs tracking-widest text-stone-gray dark:text-warm-silver uppercase mb-4">Result</p>
+            <p className="text-xs tracking-widest text-stone-gray dark:text-warm-silver uppercase mb-4">{t('result.subtitle')}</p>
             <h1 className="font-serif-display text-3xl sm:text-4xl text-near-black dark:text-ivory mb-3" style={{ lineHeight: 1.20 }}>
-              测试结果
+              {t('result.title')}
             </h1>
-            <p className="text-olive-gray dark:text-warm-silver" style={{ lineHeight: 1.60 }}>与你最相似的闪耀色彩角色</p>
+            <p className="text-olive-gray dark:text-warm-silver" style={{ lineHeight: 1.60 }}>{t('result.description')}</p>
           </div>
 
           <div className="mb-10">
@@ -72,7 +98,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
                 className="inline-block px-4 py-1.5 bg-ivory dark:bg-dark-surface text-terracotta rounded-full text-sm font-medium"
                 style={{ boxShadow: 'var(--tag-ring)' }}
               >
-                最佳匹配
+                {t('result.bestMatch')}
               </span>
             </div>
             <div className="max-w-sm mx-auto animate-scale-in stagger-3">
@@ -90,17 +116,17 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
       <div className="bg-near-black px-4 py-16">
         <div className="max-w-3xl mx-auto">
           <h2 className="font-serif-display text-xl text-ivory mb-6 text-center" style={{ lineHeight: 1.20 }}>
-            维度对比
+            {t('result.radarTitle')}
           </h2>
           <div className="rounded-2xl p-3 sm:p-6" style={{ backgroundColor: '#30302e', border: '1px solid #30302e' }}>
             <ResponsiveContainer width="100%" height={350}>
-              <RadarChart data={radarData} margin={{ top: 20, right: 35, bottom: 20, left: 35 }}>
+              <RadarChart data={radarData} margin={{ top: 20, right: 50, bottom: 20, left: 50 }}>
                 <PolarGrid stroke="#4d4c48" />
-                <PolarAngleAxis dataKey="dimension" tick={{ fontSize: 12, fill: '#b0aea5' }} />
+                <PolarAngleAxis dataKey="dimension" tick={{ fontSize: 11, fill: '#b0aea5' }} />
                 <PolarRadiusAxis angle={90} domain={[0, 10]} tick={{ fontSize: 10, fill: '#87867f' }} />
                 <Radar
-                  name="你"
-                  dataKey="你"
+                  name={userLabel}
+                  dataKey={userLabel}
                   stroke="#c96442"
                   fill="#c96442"
                   fillOpacity={0.2}
@@ -127,7 +153,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
           {top3.length > 1 && (
             <div className="mb-14">
               <h2 className="font-serif-display text-xl text-near-black dark:text-ivory mb-6 text-center" style={{ lineHeight: 1.20 }}>
-                也很相似的角色
+                {t('result.otherMatches')}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {top3.slice(1).map((result, i) => (
@@ -155,21 +181,24 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
             style={{ border: '1px solid var(--card-border-color)', boxShadow: 'var(--card-shadow)' }}
           >
             <h2 className="font-serif-display text-xl text-near-black dark:text-ivory mb-6" style={{ lineHeight: 1.20 }}>
-              你的维度分数
+              {t('result.userScores')}
             </h2>
             <div className="space-y-4">
-              {dimensions.map((dim) => (
-                <div key={dim.key} className="flex items-center gap-3">
-                  <span className="w-20 text-sm text-olive-gray dark:text-warm-silver shrink-0">{dim.label}</span>
-                  <div className="flex-1 h-2 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-terracotta rounded-full transition-all duration-500"
-                      style={{ width: `${userScores[dim.key] * 10}%`, opacity: 0.7 + (userScores[dim.key] / 10) * 0.3 }}
-                    />
+              {dimensions.map((dim) => {
+                const label = t(dimLabelKeys[dim.key]);
+                return (
+                  <div key={dim.key} className="flex items-center gap-3">
+                    <span className="w-20 text-sm text-olive-gray dark:text-warm-silver shrink-0">{label}</span>
+                    <div className="flex-1 h-2 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-terracotta rounded-full transition-all duration-500"
+                        style={{ width: `${userScores[dim.key] * 10}%`, opacity: 0.7 + (userScores[dim.key] / 10) * 0.3 }}
+                      />
+                    </div>
+                    <span className="w-6 text-right text-sm text-stone-gray dark:text-warm-silver">{userScores[dim.key]}</span>
                   </div>
-                  <span className="w-6 text-right text-sm text-stone-gray dark:text-warm-silver">{userScores[dim.key]}</span>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
@@ -181,7 +210,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
                 className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-sm font-medium hover:opacity-90 transition-all cursor-pointer"
                 style={{ boxShadow: '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px' }}
               >
-                {shareState === 'copied' ? '已复制到剪贴板' : '分享结果'}
+                {shareState === 'copied' ? t('result.copied') : t('result.share')}
               </button>
               <button
                 onClick={onConfirmReset}
@@ -196,14 +225,14 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
                     : 'var(--btn-dark-ring)'
                 }}
               >
-                {confirmingReset ? '确认清除？' : '重新测试'}
+                {confirmingReset ? t('result.confirmClear') : t('result.retake')}
               </button>
             </div>
             <button
               onClick={() => navigate('/characters')}
               className="text-sm text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory transition-colors cursor-pointer"
             >
-              查看所有角色 →
+              {t('result.viewAll')}
             </button>
           </div>
         </div>

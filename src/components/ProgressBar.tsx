@@ -1,3 +1,5 @@
+import { useLocale } from '../i18n';
+
 interface ProgressBarProps {
   current: number;
   total: number;
@@ -5,6 +7,7 @@ interface ProgressBarProps {
 
 export default function ProgressBar({ current, total }: ProgressBarProps) {
   const percentage = Math.round((current / total) * 100);
+  const { t } = useLocale();
 
   return (
     <div className="w-full">
@@ -14,7 +17,7 @@ export default function ProgressBar({ current, total }: ProgressBarProps) {
         aria-valuenow={current}
         aria-valuemin={0}
         aria-valuemax={total}
-        aria-label={`已完成 ${current} / ${total} 题`}
+        aria-label={t('progress.aria', { current, total })}
       >
         <div
           className="h-full bg-terracotta rounded-full transition-all duration-500 ease-out"

@@ -7,13 +7,15 @@ import ResultPage from './ResultPage';
 import { calculateDimensionScores, matchCharacters } from '../utils/matching';
 import { characters } from '../data/characters';
 import type { MatchResult } from '../types';
+import { useLocale } from '../i18n';
+import type { TranslationKey } from '../i18n';
 
 const STORAGE_KEY = 'shiny-quiz-progress';
 
-const MILESTONES: Record<number, { title: string; subtitle: string }> = {
-  10: { title: '好的开始！', subtitle: '你已经完成了最初的 10 道题' },
-  20: { title: '已过半！', subtitle: '对你的了解越来越清晰了' },
-  30: { title: '就快完成了！', subtitle: '最后几道题，加油' },
+const MILESTONES: Record<number, { titleKey: TranslationKey; subtitleKey: TranslationKey }> = {
+  10: { titleKey: 'milestone.10.title', subtitleKey: 'milestone.10.subtitle' },
+  20: { titleKey: 'milestone.20.title', subtitleKey: 'milestone.20.subtitle' },
+  30: { titleKey: 'milestone.30.title', subtitleKey: 'milestone.30.subtitle' },
 };
 
 function loadSavedProgress(): { answers: Record<number, number>; currentIndex: number } | null {
@@ -38,6 +40,7 @@ function clearProgress() {
 
 export default function QuizPage() {
   const navigate = useNavigate();
+  const { t } = useLocale();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [results, setResults] = useState<MatchResult[] | null>(null);
@@ -145,13 +148,13 @@ export default function QuizPage() {
       <div className="min-h-screen flex flex-col items-center justify-center px-4 py-16">
         <div className="max-w-lg text-center">
           <p className="animate-fade-in-up stagger-1 text-xs tracking-widest text-stone-gray dark:text-warm-silver uppercase mb-6">
-            Personality Quiz
+            {t('landing.subtitle')}
           </p>
           <h1 className="animate-fade-in-up stagger-2 font-serif-display text-4xl sm:text-5xl text-near-black dark:text-ivory mb-4" style={{ lineHeight: 1.10 }}>
-            闪耀色彩性格测试
+            {t('landing.title')}
           </h1>
           <p className="animate-fade-in-up stagger-2 text-base text-olive-gray dark:text-warm-silver mb-3" style={{ lineHeight: 1.60 }}>
-            シャイニーカラーズ パーソナリティ診断
+            {t('landing.titleJa')}
           </p>
 
           {/* Decorative divider */}
@@ -164,10 +167,10 @@ export default function QuizPage() {
           {hasSaved ? (
             <>
               <p className="animate-fade-in-up stagger-3 text-olive-gray dark:text-warm-silver mb-2" style={{ lineHeight: 1.60 }}>
-                你有一次未完成的测试
+                {t('landing.savedProgress')}
               </p>
               <p className="animate-fade-in-up stagger-3 text-sm text-stone-gray dark:text-warm-silver mb-4">
-                已完成 {savedCount}/{questions.length} 题
+                {t('landing.savedCount', { done: savedCount, total: questions.length })}
               </p>
               <div className="animate-fade-in stagger-3 max-w-xs mx-auto mb-8">
                 <div className="w-full h-2 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden">
@@ -183,7 +186,7 @@ export default function QuizPage() {
                   className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-base font-medium hover:opacity-90 transition-all cursor-pointer"
                   style={{ boxShadow: '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px' }}
                 >
-                  {savedCount >= questions.length ? '查看结果' : '继续测试'}
+                  {savedCount >= questions.length ? t('landing.viewResults') : t('landing.resume')}
                 </button>
               </div>
               <div className="animate-fade-in stagger-4 mt-8">
@@ -195,15 +198,14 @@ export default function QuizPage() {
                       : 'text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory'
                   }`}
                 >
-                  {confirmingReset ? '确认清除？' : '重新开始 →'}
+                  {confirmingReset ? t('landing.confirmClear') : t('landing.restart')}
                 </button>
               </div>
             </>
           ) : (
             <>
-              <p className="animate-fade-in-up stagger-3 text-olive-gray dark:text-warm-silver mb-10" style={{ lineHeight: 1.60 }}>
-                回答 {questions.length} 道性格题目，<br />
-                找到与你最相似的闪耀色彩角色！
+              <p className="animate-fade-in-up stagger-3 text-olive-gray dark:text-warm-silver mb-10 whitespace-pre-line" style={{ lineHeight: 1.60 }}>
+                {t('landing.description', { total: questions.length })}
               </p>
               <div className="animate-fade-in-up stagger-4">
                 <button
@@ -211,7 +213,7 @@ export default function QuizPage() {
                   className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-base font-medium hover:opacity-90 transition-all cursor-pointer"
                   style={{ boxShadow: '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px' }}
                 >
-                  开始测试
+                  {t('landing.start')}
                 </button>
               </div>
               <div className="animate-fade-in stagger-4 mt-8">
@@ -219,7 +221,7 @@ export default function QuizPage() {
                   onClick={() => navigate('/characters')}
                   className="text-sm text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory transition-colors cursor-pointer"
                 >
-                  先看看有哪些角色 →
+                  {t('landing.browseCharacters')}
                 </button>
               </div>
             </>
@@ -243,10 +245,10 @@ export default function QuizPage() {
               <span className="block w-8 h-px bg-border-warm dark:bg-dark-warm" />
             </div>
             <h2 className="font-serif-display text-2xl sm:text-3xl text-near-black dark:text-ivory mb-3" style={{ lineHeight: 1.20 }}>
-              {milestone.title}
+              {t(milestone.titleKey)}
             </h2>
             <p className="text-olive-gray dark:text-warm-silver mb-6" style={{ lineHeight: 1.60 }}>
-              {milestone.subtitle}
+              {t(milestone.subtitleKey)}
             </p>
             <div className="max-w-xs mx-auto mb-3">
               <div className="w-full h-2 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden">
@@ -257,7 +259,7 @@ export default function QuizPage() {
               </div>
             </div>
             <p className="text-sm text-stone-gray dark:text-warm-silver mb-8">
-              {showMilestone}/{questions.length} 题
+              {t('milestone.progress', { done: showMilestone, total: questions.length })}
             </p>
           </div>
           <div className="animate-fade-in-up stagger-3">
@@ -270,7 +272,7 @@ export default function QuizPage() {
               className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-base font-medium hover:opacity-90 transition-all cursor-pointer"
               style={{ boxShadow: '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px' }}
             >
-              继续答题
+              {t('milestone.continue')}
             </button>
           </div>
         </div>
@@ -292,7 +294,7 @@ export default function QuizPage() {
                 : 'text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory'
             }`}
           >
-            {confirmingReset ? '确认退出？' : '← 返回首页'}
+            {confirmingReset ? t('quiz.confirmExit') : t('quiz.back')}
           </button>
           <span className="text-sm text-stone-gray dark:text-warm-silver">
             {answeredCount}/{questions.length}
@@ -322,7 +324,7 @@ export default function QuizPage() {
           className="px-6 py-2.5 text-sm rounded-lg bg-warm-sand dark:bg-dark-warm text-charcoal-warm dark:text-ivory hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
           style={{ boxShadow: 'var(--btn-secondary-ring)' }}
         >
-          上一题
+          {t('quiz.prev')}
         </button>
 
         <button
@@ -339,7 +341,7 @@ export default function QuizPage() {
               : 'var(--btn-dark-ring)'
           }}
         >
-          {isLastQuestion && allAnswered ? '查看结果' : '下一题'}
+          {isLastQuestion && allAnswered ? t('quiz.viewResults') : t('quiz.next')}
         </button>
       </div>
     </div>
