@@ -101,6 +101,13 @@ npm run build     # 产物输出到 dist/
 npm run preview   # 本地预览生产版本
 ```
 
+### 部署上线
+
+本项目可以部署到任何静态托管平台，以下是零基础部署指南：
+
+- [部署到 Cloudflare Pages](./docs/cloudflare-pages-deploy.md)
+- [部署到 Vercel](./docs/vercel-deploy.md)
+
 ---
 
 ## ✦ 项目结构
