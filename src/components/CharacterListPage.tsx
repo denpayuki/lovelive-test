@@ -25,16 +25,16 @@ export default function CharacterListPage() {
         <div className="mb-10">
           <button
             onClick={() => navigate('/')}
-            className="text-sm text-stone-gray hover:text-dark-warm transition-colors cursor-pointer flex items-center gap-1 mb-5"
+            className="text-sm text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory transition-colors cursor-pointer flex items-center gap-1 mb-5"
           >
             ← 返回首页
           </button>
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="font-serif-display text-3xl sm:text-4xl text-near-black" style={{ lineHeight: 1.20 }}>
+              <h1 className="font-serif-display text-3xl sm:text-4xl text-near-black dark:text-ivory" style={{ lineHeight: 1.20 }}>
                 角色一览
               </h1>
-              <p className="text-sm text-olive-gray mt-2" style={{ lineHeight: 1.60 }}>
+              <p className="text-sm text-olive-gray dark:text-warm-silver mt-2" style={{ lineHeight: 1.60 }}>
                 シャイニーカラーズ 全28人
               </p>
             </div>
@@ -60,10 +60,10 @@ export default function CharacterListPage() {
                   className="w-3 h-3 rounded-full shrink-0"
                   style={{ backgroundColor: unitColor }}
                 />
-                <h2 className="font-serif-display text-xl text-near-black" style={{ lineHeight: 1.20 }}>
+                <h2 className="font-serif-display text-xl text-near-black dark:text-ivory" style={{ lineHeight: 1.20 }}>
                   {unit}
                 </h2>
-                <span className="text-sm text-stone-gray">{unitCharacters.length}人</span>
+                <span className="text-sm text-stone-gray dark:text-warm-silver">{unitCharacters.length}人</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {unitCharacters.map((char) => {
@@ -82,7 +82,7 @@ export default function CharacterListPage() {
                           setExpandedId(isExpanded ? null : char.id);
                         }
                       }}
-                      className="cursor-pointer rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3898ec] focus-visible:ring-offset-2 focus-visible:ring-offset-parchment"
+                      className="cursor-pointer rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3898ec] focus-visible:ring-offset-2 focus-visible:ring-offset-parchment dark:focus-visible:ring-offset-near-black"
                     >
                       <CharacterCard
                         character={char}

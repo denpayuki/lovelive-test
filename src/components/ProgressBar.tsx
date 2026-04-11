@@ -9,7 +9,7 @@ export default function ProgressBar({ current, total }: ProgressBarProps) {
   return (
     <div className="w-full">
       <div
-        className="w-full h-2 bg-border-cream rounded-full overflow-hidden"
+        className="w-full h-2 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden"
         role="progressbar"
         aria-valuenow={current}
         aria-valuemin={0}

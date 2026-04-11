@@ -24,18 +24,18 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
 
   return (
     <div
-      className="bg-ivory rounded-2xl overflow-hidden transition-all duration-300 hover:translate-y-[-2px]"
+      className="bg-ivory dark:bg-dark-surface rounded-2xl overflow-hidden transition-all duration-300 hover:translate-y-[-2px]"
       style={{
-        border: '1px solid #f0eee6',
-        boxShadow: 'rgba(0,0,0,0.05) 0px 4px 24px',
+        border: '1px solid var(--card-border-color)',
+        boxShadow: 'var(--card-shadow)',
       }}
     >
       {/* Image area */}
-      <div className="relative aspect-square bg-parchment flex items-center justify-center overflow-hidden">
+      <div className="relative aspect-square bg-parchment dark:bg-near-black flex items-center justify-center overflow-hidden">
         {imgError ? (
           <div className="flex flex-col items-center justify-center w-full h-full">
-            <span className="text-4xl mb-2 text-near-black">{character.nameJa.charAt(0)}</span>
-            <span className="text-sm text-stone-gray">立绘待添加</span>
+            <span className="text-4xl mb-2 text-near-black dark:text-ivory">{character.nameJa.charAt(0)}</span>
+            <span className="text-sm text-stone-gray dark:text-warm-silver">立绘待添加</span>
           </div>
         ) : (
           <img
@@ -47,8 +47,8 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
         )}
         {rank && (
           <div
-            className="absolute top-3 left-3 w-8 h-8 rounded-full bg-ivory/90 backdrop-blur-sm flex items-center justify-center text-sm font-medium text-near-black"
-            style={{ boxShadow: '0px 0px 0px 1px #e8e6dc' }}
+            className="absolute top-3 left-3 w-8 h-8 rounded-full bg-ivory/90 dark:bg-dark-surface/90 backdrop-blur-sm flex items-center justify-center text-sm font-medium text-near-black dark:text-ivory"
+            style={{ boxShadow: 'var(--badge-ring)' }}
             aria-label={`排名第 ${rank}`}
           >
             {rank}
@@ -56,8 +56,8 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
         )}
         {percentage !== undefined && (
           <div
-            className="absolute top-3 right-3 px-3 py-1 rounded-full bg-ivory/90 backdrop-blur-sm text-sm font-medium text-terracotta"
-            style={{ boxShadow: '0px 0px 0px 1px #e8e6dc' }}
+            className="absolute top-3 right-3 px-3 py-1 rounded-full bg-ivory/90 dark:bg-dark-surface/90 backdrop-blur-sm text-sm font-medium text-terracotta"
+            style={{ boxShadow: 'var(--badge-ring)' }}
             aria-label={`相似度 ${percentage}%`}
           >
             相似度 {percentage}%
@@ -67,7 +67,7 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
 
       {/* Info */}
       <div className="p-5">
-        <h3 className="font-serif-display text-lg text-near-black" style={{ lineHeight: 1.20 }}>
+        <h3 className="font-serif-display text-lg text-near-black dark:text-ivory" style={{ lineHeight: 1.20 }}>
           {character.nameJa}
         </h3>
         <div className="flex items-center gap-2 mt-1.5 mb-3">
@@ -76,24 +76,24 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
             style={{ backgroundColor: character.unitColor }}
             aria-hidden="true"
           />
-          <span className="text-sm text-olive-gray">{character.unit}</span>
+          <span className="text-sm text-olive-gray dark:text-warm-silver">{character.unit}</span>
         </div>
-        <p className="text-sm text-olive-gray" style={{ lineHeight: 1.60 }}>{character.description}</p>
+        <p className="text-sm text-olive-gray dark:text-warm-silver" style={{ lineHeight: 1.60 }}>{character.description}</p>
 
         {/* Expand hint — only when used in a list context where showDimensions toggles */}
         {showDimensions === false && (
-          <p className="mt-3 text-xs text-stone-gray flex items-center gap-1">
+          <p className="mt-3 text-xs text-stone-gray dark:text-warm-silver flex items-center gap-1">
             <span aria-hidden="true">▸</span> 点击查看维度详情
           </p>
         )}
 
         {showDimensions && (
-          <div className="mt-5 pt-4 space-y-2.5" style={{ borderTop: '1px solid #f0eee6' }}>
+          <div className="mt-5 pt-4 space-y-2.5" style={{ borderTop: '1px solid var(--dim-separator)' }}>
             {dimensionLabels.map(({ key, label }) => (
               <div key={key} className="flex items-center gap-2 text-xs">
-                <span className="w-16 text-stone-gray shrink-0">{label}</span>
+                <span className="w-16 text-stone-gray dark:text-warm-silver shrink-0">{label}</span>
                 <div
-                  className="flex-1 h-1.5 bg-border-cream rounded-full overflow-hidden"
+                  className="flex-1 h-1.5 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden"
                   role="meter"
                   aria-label={label}
                   aria-valuenow={character.dimensions[key]}
@@ -108,7 +108,7 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
                     }}
                   />
                 </div>
-                <span className="w-5 text-right text-stone-gray">{character.dimensions[key]}</span>
+                <span className="w-5 text-right text-stone-gray dark:text-warm-silver">{character.dimensions[key]}</span>
               </div>
             ))}
           </div>

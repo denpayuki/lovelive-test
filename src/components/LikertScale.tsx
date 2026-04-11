@@ -37,7 +37,7 @@ export default function LikertScale({ value, onChange }: LikertScaleProps) {
   return (
     <div className="flex flex-col items-center gap-4">
       {/* Labels */}
-      <div className="flex w-full justify-between text-sm text-stone-gray px-2" aria-hidden="true">
+      <div className="flex w-full justify-between text-sm text-stone-gray dark:text-warm-silver px-2" aria-hidden="true">
         <span>认同</span>
         <span>不认同</span>
       </div>
@@ -61,7 +61,7 @@ export default function LikertScale({ value, onChange }: LikertScaleProps) {
               tabIndex={isSelected || (value === undefined && idx === 0) ? 0 : -1}
               onClick={() => onChange(opt.value)}
               onKeyDown={(e) => handleKeyDown(e, idx)}
-              className="flex items-center justify-center cursor-pointer w-11 h-11 sm:w-14 sm:h-14 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3898ec] focus-visible:ring-offset-2 focus-visible:ring-offset-parchment"
+              className="flex items-center justify-center cursor-pointer w-11 h-11 sm:w-14 sm:h-14 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3898ec] focus-visible:ring-offset-2 focus-visible:ring-offset-parchment dark:focus-visible:ring-offset-near-black"
               style={{ background: 'none', border: 'none', padding: 0 }}
             >
               <span
@@ -74,7 +74,7 @@ export default function LikertScale({ value, onChange }: LikertScaleProps) {
                 style={{
                   backgroundColor: opt.bg,
                   boxShadow: isSelected
-                    ? `${opt.bg} 0px 0px 0px 3px, #f5f4ed 0px 0px 0px 5px, ${opt.bg} 0px 0px 0px 7px`
+                    ? `${opt.bg} 0px 0px 0px 3px, var(--ring-page-bg) 0px 0px 0px 5px, ${opt.bg} 0px 0px 0px 7px`
                     : 'none',
                 }}
               />
@@ -84,7 +84,7 @@ export default function LikertScale({ value, onChange }: LikertScaleProps) {
       </div>
 
       {/* Selected label */}
-      <div className="h-5 text-sm text-olive-gray" aria-live="polite">
+      <div className="h-5 text-sm text-olive-gray dark:text-warm-silver" aria-live="polite">
         {value !== undefined && options.find((o) => o.value === value)?.label}
       </div>
     </div>

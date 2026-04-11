@@ -144,33 +144,33 @@ export default function QuizPage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-4 py-16">
         <div className="max-w-lg text-center">
-          <p className="animate-fade-in-up stagger-1 text-xs tracking-widest text-stone-gray uppercase mb-6">
+          <p className="animate-fade-in-up stagger-1 text-xs tracking-widest text-stone-gray dark:text-warm-silver uppercase mb-6">
             Personality Quiz
           </p>
-          <h1 className="animate-fade-in-up stagger-2 font-serif-display text-4xl sm:text-5xl text-near-black mb-4" style={{ lineHeight: 1.10 }}>
+          <h1 className="animate-fade-in-up stagger-2 font-serif-display text-4xl sm:text-5xl text-near-black dark:text-ivory mb-4" style={{ lineHeight: 1.10 }}>
             闪耀色彩性格测试
           </h1>
-          <p className="animate-fade-in-up stagger-2 text-base text-olive-gray mb-3" style={{ lineHeight: 1.60 }}>
+          <p className="animate-fade-in-up stagger-2 text-base text-olive-gray dark:text-warm-silver mb-3" style={{ lineHeight: 1.60 }}>
             シャイニーカラーズ パーソナリティ診断
           </p>
 
           {/* Decorative divider */}
           <div className="animate-fade-in stagger-3 flex items-center justify-center gap-3 my-8">
-            <span className="block w-12 h-px bg-border-warm" />
+            <span className="block w-12 h-px bg-border-warm dark:bg-dark-warm" />
             <span className="block w-1.5 h-1.5 rounded-full bg-terracotta" />
-            <span className="block w-12 h-px bg-border-warm" />
+            <span className="block w-12 h-px bg-border-warm dark:bg-dark-warm" />
           </div>
 
           {hasSaved ? (
             <>
-              <p className="animate-fade-in-up stagger-3 text-olive-gray mb-2" style={{ lineHeight: 1.60 }}>
+              <p className="animate-fade-in-up stagger-3 text-olive-gray dark:text-warm-silver mb-2" style={{ lineHeight: 1.60 }}>
                 你有一次未完成的测试
               </p>
-              <p className="animate-fade-in-up stagger-3 text-sm text-stone-gray mb-4">
+              <p className="animate-fade-in-up stagger-3 text-sm text-stone-gray dark:text-warm-silver mb-4">
                 已完成 {savedCount}/{questions.length} 题
               </p>
               <div className="animate-fade-in stagger-3 max-w-xs mx-auto mb-8">
-                <div className="w-full h-2 bg-border-cream rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden">
                   <div
                     className="h-full bg-terracotta rounded-full transition-all duration-500 ease-out"
                     style={{ width: `${savedPercentage}%` }}
@@ -192,7 +192,7 @@ export default function QuizPage() {
                   className={`text-sm transition-colors cursor-pointer ${
                     confirmingReset
                       ? 'text-[#b53333] font-medium'
-                      : 'text-stone-gray hover:text-dark-warm'
+                      : 'text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory'
                   }`}
                 >
                   {confirmingReset ? '确认清除？' : '重新开始 →'}
@@ -201,7 +201,7 @@ export default function QuizPage() {
             </>
           ) : (
             <>
-              <p className="animate-fade-in-up stagger-3 text-olive-gray mb-10" style={{ lineHeight: 1.60 }}>
+              <p className="animate-fade-in-up stagger-3 text-olive-gray dark:text-warm-silver mb-10" style={{ lineHeight: 1.60 }}>
                 回答 {questions.length} 道性格题目，<br />
                 找到与你最相似的闪耀色彩角色！
               </p>
@@ -217,7 +217,7 @@ export default function QuizPage() {
               <div className="animate-fade-in stagger-4 mt-8">
                 <button
                   onClick={() => navigate('/characters')}
-                  className="text-sm text-stone-gray hover:text-dark-warm transition-colors cursor-pointer"
+                  className="text-sm text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory transition-colors cursor-pointer"
                 >
                   先看看有哪些角色 →
                 </button>
@@ -238,25 +238,25 @@ export default function QuizPage() {
         <div className="max-w-md text-center">
           <div className="animate-scale-in">
             <div className="flex items-center justify-center gap-3 mb-8">
-              <span className="block w-8 h-px bg-border-warm" />
+              <span className="block w-8 h-px bg-border-warm dark:bg-dark-warm" />
               <span className="block w-2 h-2 rounded-full bg-terracotta" />
-              <span className="block w-8 h-px bg-border-warm" />
+              <span className="block w-8 h-px bg-border-warm dark:bg-dark-warm" />
             </div>
-            <h2 className="font-serif-display text-2xl sm:text-3xl text-near-black mb-3" style={{ lineHeight: 1.20 }}>
+            <h2 className="font-serif-display text-2xl sm:text-3xl text-near-black dark:text-ivory mb-3" style={{ lineHeight: 1.20 }}>
               {milestone.title}
             </h2>
-            <p className="text-olive-gray mb-6" style={{ lineHeight: 1.60 }}>
+            <p className="text-olive-gray dark:text-warm-silver mb-6" style={{ lineHeight: 1.60 }}>
               {milestone.subtitle}
             </p>
             <div className="max-w-xs mx-auto mb-3">
-              <div className="w-full h-2 bg-border-cream rounded-full overflow-hidden">
+              <div className="w-full h-2 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden">
                 <div
                   className="h-full bg-terracotta rounded-full transition-all duration-700 ease-out"
                   style={{ width: `${milestonePercentage}%` }}
                 />
               </div>
             </div>
-            <p className="text-sm text-stone-gray mb-8">
+            <p className="text-sm text-stone-gray dark:text-warm-silver mb-8">
               {showMilestone}/{questions.length} 题
             </p>
           </div>
@@ -289,12 +289,12 @@ export default function QuizPage() {
             className={`text-sm transition-colors cursor-pointer flex items-center gap-1 ${
               confirmingReset
                 ? 'text-[#b53333] font-medium'
-                : 'text-stone-gray hover:text-dark-warm'
+                : 'text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory'
             }`}
           >
             {confirmingReset ? '确认退出？' : '← 返回首页'}
           </button>
-          <span className="text-sm text-stone-gray">
+          <span className="text-sm text-stone-gray dark:text-warm-silver">
             {answeredCount}/{questions.length}
           </span>
         </div>
@@ -319,8 +319,8 @@ export default function QuizPage() {
         <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
-          className="px-6 py-2.5 text-sm rounded-lg bg-warm-sand text-charcoal-warm hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
-          style={{ boxShadow: '#e8e6dc 0px 0px 0px 0px, #d1cfc5 0px 0px 0px 1px' }}
+          className="px-6 py-2.5 text-sm rounded-lg bg-warm-sand dark:bg-dark-warm text-charcoal-warm dark:text-ivory hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+          style={{ boxShadow: 'var(--btn-secondary-ring)' }}
         >
           上一题
         </button>
@@ -336,7 +336,7 @@ export default function QuizPage() {
           style={{
             boxShadow: isLastQuestion && allAnswered
               ? '#c96442 0px 0px 0px 0px, #c96442 0px 0px 0px 1px'
-              : '#30302e 0px 0px 0px 0px, #30302e 0px 0px 0px 1px'
+              : 'var(--btn-dark-ring)'
           }}
         >
           {isLastQuestion && allAnswered ? '查看结果' : '下一题'}

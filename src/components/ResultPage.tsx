@@ -59,18 +59,18 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
       <div className="px-4 pt-12 pb-16">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12 animate-fade-in-up">
-            <p className="text-xs tracking-widest text-stone-gray uppercase mb-4">Result</p>
-            <h1 className="font-serif-display text-3xl sm:text-4xl text-near-black mb-3" style={{ lineHeight: 1.20 }}>
+            <p className="text-xs tracking-widest text-stone-gray dark:text-warm-silver uppercase mb-4">Result</p>
+            <h1 className="font-serif-display text-3xl sm:text-4xl text-near-black dark:text-ivory mb-3" style={{ lineHeight: 1.20 }}>
               测试结果
             </h1>
-            <p className="text-olive-gray" style={{ lineHeight: 1.60 }}>与你最相似的闪耀色彩角色</p>
+            <p className="text-olive-gray dark:text-warm-silver" style={{ lineHeight: 1.60 }}>与你最相似的闪耀色彩角色</p>
           </div>
 
           <div className="mb-10">
             <div className="text-center mb-5 animate-fade-in-up stagger-2">
               <span
-                className="inline-block px-4 py-1.5 bg-ivory text-terracotta rounded-full text-sm font-medium"
-                style={{ boxShadow: '#f0eee6 0px 0px 0px 0px, #e8e6dc 0px 0px 0px 1px' }}
+                className="inline-block px-4 py-1.5 bg-ivory dark:bg-dark-surface text-terracotta rounded-full text-sm font-medium"
+                style={{ boxShadow: 'var(--tag-ring)' }}
               >
                 最佳匹配
               </span>
@@ -126,7 +126,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
         <div className="max-w-3xl mx-auto">
           {top3.length > 1 && (
             <div className="mb-14">
-              <h2 className="font-serif-display text-xl text-near-black mb-6 text-center" style={{ lineHeight: 1.20 }}>
+              <h2 className="font-serif-display text-xl text-near-black dark:text-ivory mb-6 text-center" style={{ lineHeight: 1.20 }}>
                 也很相似的角色
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -144,30 +144,30 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
 
           {/* Decorative divider */}
           <div className="flex items-center justify-center gap-3 mb-14">
-            <span className="block w-16 h-px bg-border-warm" />
+            <span className="block w-16 h-px bg-border-warm dark:bg-dark-warm" />
             <span className="block w-1.5 h-1.5 rounded-full bg-terracotta" />
-            <span className="block w-16 h-px bg-border-warm" />
+            <span className="block w-16 h-px bg-border-warm dark:bg-dark-warm" />
           </div>
 
           {/* User scores */}
           <div
-            className="bg-ivory rounded-2xl p-6 sm:p-8 mb-12"
-            style={{ border: '1px solid #f0eee6', boxShadow: 'rgba(0,0,0,0.05) 0px 4px 24px' }}
+            className="bg-ivory dark:bg-dark-surface rounded-2xl p-6 sm:p-8 mb-12"
+            style={{ border: '1px solid var(--card-border-color)', boxShadow: 'var(--card-shadow)' }}
           >
-            <h2 className="font-serif-display text-xl text-near-black mb-6" style={{ lineHeight: 1.20 }}>
+            <h2 className="font-serif-display text-xl text-near-black dark:text-ivory mb-6" style={{ lineHeight: 1.20 }}>
               你的维度分数
             </h2>
             <div className="space-y-4">
               {dimensions.map((dim) => (
                 <div key={dim.key} className="flex items-center gap-3">
-                  <span className="w-20 text-sm text-olive-gray shrink-0">{dim.label}</span>
-                  <div className="flex-1 h-2 bg-border-cream rounded-full overflow-hidden">
+                  <span className="w-20 text-sm text-olive-gray dark:text-warm-silver shrink-0">{dim.label}</span>
+                  <div className="flex-1 h-2 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden">
                     <div
                       className="h-full bg-terracotta rounded-full transition-all duration-500"
                       style={{ width: `${userScores[dim.key] * 10}%`, opacity: 0.7 + (userScores[dim.key] / 10) * 0.3 }}
                     />
                   </div>
-                  <span className="w-6 text-right text-sm text-stone-gray">{userScores[dim.key]}</span>
+                  <span className="w-6 text-right text-sm text-stone-gray dark:text-warm-silver">{userScores[dim.key]}</span>
                 </div>
               ))}
             </div>
@@ -193,7 +193,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
                 style={{
                   boxShadow: confirmingReset
                     ? '#b53333 0px 0px 0px 0px, #b53333 0px 0px 0px 1px'
-                    : '#30302e 0px 0px 0px 0px, #30302e 0px 0px 0px 1px'
+                    : 'var(--btn-dark-ring)'
                 }}
               >
                 {confirmingReset ? '确认清除？' : '重新测试'}
@@ -201,7 +201,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
             </div>
             <button
               onClick={() => navigate('/characters')}
-              className="text-sm text-stone-gray hover:text-dark-warm transition-colors cursor-pointer"
+              className="text-sm text-stone-gray dark:text-warm-silver hover:text-dark-warm dark:hover:text-ivory transition-colors cursor-pointer"
             >
               查看所有角色 →
             </button>
