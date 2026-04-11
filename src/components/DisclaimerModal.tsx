@@ -85,6 +85,13 @@ export default function DisclaimerModal({ open, onClose }: DisclaimerModalProps)
             </span>
             <p>{t('disclaimer.p3')}</p>
           </div>
+
+          <div className="flex gap-3">
+            <span className="shrink-0 mt-0.5 w-5 h-5 rounded-full bg-terracotta/15 dark:bg-terracotta/25 flex items-center justify-center">
+              <span className="block w-1.5 h-1.5 rounded-full bg-terracotta" />
+            </span>
+            <p>{t('disclaimer.p4')}</p>
+          </div>
         </div>
 
         {/* Footer */}

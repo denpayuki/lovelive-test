@@ -86,6 +86,7 @@ const zh = {
   'disclaimer.p2': '本项目为{highlight}，与 Bandai Namco Entertainment、Project ShinyColors 及相关官方无任何关联。',
   'disclaimer.p2.highlight': '粉丝个人作品',
   'disclaimer.p3': '项目中使用的角色图片及相关素材的版权归原版权方所有。如有侵权，请联系作者删除。',
+  'disclaimer.p4': '本项目为纯前端应用，所有测试数据仅保存在你的浏览器本地，不会上传至任何服务器，请放心使用。',
 
   // Theme toggle
   'theme.light': '切换到浅色模式',
