@@ -41,7 +41,7 @@ function proxyUrl(url: string): string {
 export async function fetchImageAsDataUrl(url: string): Promise<string> {
   // Approach 1: fetch (uses Vite proxy in dev, direct in prod)
   try {
-    const res = await fetch(proxyUrl(url));
+    const res = await fetch(proxyUrl(url), { cache: 'no-store' });
     if (res.ok) {
       const blob = await res.blob();
       return await blobToDataUrl(blob);
@@ -50,7 +50,7 @@ export async function fetchImageAsDataUrl(url: string): Promise<string> {
 
   // Approach 2: direct fetch without proxy (prod fallback)
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, { cache: 'no-store' });
     if (res.ok) {
       const blob = await res.blob();
       return await blobToDataUrl(blob);
@@ -74,6 +74,6 @@ export async function fetchImageAsDataUrl(url: string): Promise<string> {
       }
     };
     img.onerror = () => reject(new Error('Image load failed'));
-    img.src = url;
+    img.src = url + (url.includes('?') ? '&' : '?') + '_t=' + Date.now();
   });
 }
