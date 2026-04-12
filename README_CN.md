@@ -186,6 +186,12 @@ shiny-mbti/
 
 ---
 
+## ✦ 友情链接
+
+- [学园偶像大师MBTI测试](https://jcver.github.io/Gakumas-idolmaster-MBTI-test/) — 基于学园偶像大师角色的性格测试
+
+---
+
 ## ✦ 版权声明
 
 ### 代码部分

@@ -186,6 +186,12 @@ shiny-mbti/
 
 ---
 
+## ✦ Friend Links
+
+- [Gakuen Idolmaster MBTI Test](https://jcver.github.io/Gakumas-idolmaster-MBTI-test/) — A personality quiz based on Gakuen Idolmaster characters
+
+---
+
 ## ✦ Copyright Notice
 
 ### Code

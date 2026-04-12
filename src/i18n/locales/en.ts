@@ -89,6 +89,10 @@ const en: Record<TranslationKey, string> = {
   'disclaimer.p2.highlight': 'fan-made project',
   'disclaimer.p3': 'Character images and related assets are the property of their respective copyright holders. If there is any infringement, please contact the author for removal.',
   'disclaimer.p4': 'This is a fully client-side application. All quiz data is stored locally in your browser and is never sent to any server.',
+  'disclaimer.tab.about': 'About',
+  'disclaimer.tab.links': 'Links',
+  'disclaimer.links.title': 'Friend Links',
+  'disclaimer.links.gakumas': 'Gakuen Idolmaster MBTI Test',
 
   // Theme toggle
   'theme.light': 'Switch to light mode',

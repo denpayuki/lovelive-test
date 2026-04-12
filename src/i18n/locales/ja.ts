@@ -89,6 +89,10 @@ const ja: Record<TranslationKey, string> = {
   'disclaimer.p2.highlight': 'ファン制作作品',
   'disclaimer.p3': 'プロジェクトで使用されているキャラクター画像および関連素材の著作権は原著作権者に帰属します。問題がある場合は作者までご連絡ください。',
   'disclaimer.p4': '本プロジェクトは完全にフロントエンドで動作しており、すべてのデータはブラウザのローカルにのみ保存され、サーバーへのアップロードは一切行われません。安心してご利用ください。',
+  'disclaimer.tab.about': 'について',
+  'disclaimer.tab.links': 'リンク',
+  'disclaimer.links.title': 'フレンドリンク',
+  'disclaimer.links.gakumas': '学園アイドルマスター MBTI テスト',
 
   // Theme toggle
   'theme.light': 'ライトモードに切り替え',
