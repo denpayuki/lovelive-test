@@ -21,13 +21,4 @@ export default defineConfig({
       },
     },
   },
-  server: {
-    proxy: {
-      '/r2-assets': {
-        target: 'https://assets.sallyn.top',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/r2-assets/, ''),
-      },
-    },
-  },
 })

@@ -9,7 +9,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType>({ theme: 'light', toggleTheme: () => {} });
 
-const STORAGE_KEY = 'shiny-quiz-theme';
+const STORAGE_KEY = 'lovelive-test-theme';
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {

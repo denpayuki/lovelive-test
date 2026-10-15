@@ -20,30 +20,30 @@ interface ResultPageProps {
 }
 
 const dimensionOrder: DimensionKey[] = [
-  'extraversion', 'emotionalStability', 'assertiveness', 'warmth',
-  'openness', 'discipline', 'authenticity', 'optimism',
+  'energy', 'warmth', 'drive', 'discipline',
+  'creativity', 'confidence', 'optimism', 'independence',
 ];
 
 const dimLabelKeys: Record<DimensionKey, TranslationKey> = {
-  extraversion: 'dim.extraversion',
-  emotionalStability: 'dim.emotionalStability',
-  assertiveness: 'dim.assertiveness',
+  energy: 'dim.energy',
   warmth: 'dim.warmth',
-  openness: 'dim.openness',
+  drive: 'dim.drive',
   discipline: 'dim.discipline',
-  authenticity: 'dim.authenticity',
+  creativity: 'dim.creativity',
+  confidence: 'dim.confidence',
   optimism: 'dim.optimism',
+  independence: 'dim.independence',
 };
 
 const dimShortKeys: Record<DimensionKey, TranslationKey> = {
-  extraversion: 'dim.extraversion.short',
-  emotionalStability: 'dim.emotionalStability.short',
-  assertiveness: 'dim.assertiveness.short',
+  energy: 'dim.energy.short',
   warmth: 'dim.warmth.short',
-  openness: 'dim.openness.short',
+  drive: 'dim.drive.short',
   discipline: 'dim.discipline.short',
-  authenticity: 'dim.authenticity.short',
+  creativity: 'dim.creativity.short',
+  confidence: 'dim.confidence.short',
   optimism: 'dim.optimism.short',
+  independence: 'dim.independence.short',
 };
 
 export default function ResultPage({ results, answers, confirmingReset, onConfirmReset }: ResultPageProps) {
@@ -70,7 +70,8 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
     let imgDataUrl: string | undefined;
     try {
       imgDataUrl = await fetchImageAsDataUrl(best.character.imageUrl);
-    } catch {
+    } catch (error) {
+      console.warn('Could not load character image for export; using fallback.', error);
       // CORS or network error — ExportCard will show fallback
     }
 
@@ -95,7 +96,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
 
   const handlePreviewDownload = useCallback(() => {
     if (!previewImageUrl) return;
-    downloadBlob(previewImageUrl, `283-personality-${exportNickname}.png`);
+    downloadBlob(previewImageUrl, `lovelive-test-${exportNickname}.png`);
   }, [previewImageUrl, exportNickname]);
 
   const handlePreviewClose = useCallback(() => {
@@ -107,7 +108,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
     return {
       dimension: t(dimShortKeys[key]),
       [userLabel]: userScores[key],
-      [best.character.nameJa]: best.character.dimensions[key],
+      [best.character.name]: best.character.scores[key],
     };
   });
 
@@ -146,27 +147,27 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
 
       {/* Dark section — Radar Chart */}
       <div className="bg-near-black px-4 py-16">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <h2 className="font-serif-display text-xl text-ivory mb-6 text-center" style={{ lineHeight: 1.20 }}>
             {t('result.radarTitle')}
           </h2>
           <div className="rounded-2xl p-3 sm:p-6" style={{ backgroundColor: '#30302e', border: '1px solid #30302e' }}>
-            <ResponsiveContainer width="100%" height={350}>
-              <RadarChart data={radarData} margin={{ top: 20, right: 50, bottom: 20, left: 50 }}>
+            <ResponsiveContainer width="100%" height={420}>
+              <RadarChart data={radarData} margin={{ top: 15, right: 35, bottom: 15, left: 35 }}>
                 <PolarGrid stroke="#4d4c48" />
                 <PolarAngleAxis dataKey="dimension" tick={{ fontSize: 11, fill: '#b0aea5' }} />
-                <PolarRadiusAxis angle={90} domain={[0, 10]} tick={{ fontSize: 10, fill: '#87867f' }} />
+                <PolarRadiusAxis angle={90} orientation="left" axisLine={false} domain={[0, 10]} ticks={[3, 6, 10]} tick={false} />
                 <Radar
                   name={userLabel}
                   dataKey={userLabel}
-                  stroke="#b45535"
-                  fill="#b45535"
+                  stroke="#b83f6d"
+                  fill="#b83f6d"
                   fillOpacity={0.2}
                   strokeWidth={2}
                 />
                 <Radar
-                  name={best.character.nameJa}
-                  dataKey={best.character.nameJa}
+                  name={best.character.name}
+                  dataKey={best.character.name}
                   stroke="#b0aea5"
                   fill="#b0aea5"
                   fillOpacity={0.15}
@@ -241,7 +242,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
                 onClick={() => setNicknameModalOpen(true)}
                 disabled={exporting}
                 className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-sm font-medium hover:opacity-90 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ boxShadow: '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px' }}
+                style={{ boxShadow: '#b83f6d 0px 0px 0px 0px, #b83f6d 0px 0px 0px 1px' }}
               >
                 {exporting ? t('export.exporting') : t('export.button')}
               </button>
@@ -282,7 +283,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
       <ExportPreviewModal
         open={!!previewImageUrl}
         imageUrl={previewImageUrl || ''}
-        filename={`283-personality-${exportNickname}.png`}
+        filename={`lovelive-test-${exportNickname}.png`}
         onDownload={handlePreviewDownload}
         onClose={handlePreviewClose}
       />
@@ -299,7 +300,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
           characterImageDataUrl={charImageDataUrl}
           brandText={t('export.brand')}
           headlineSuffix={t('export.headlineSuffix')}
-          similarityText={t('export.similarity', { name: best.character.nameJa, percentage: best.percentage })}
+          similarityText={t('export.similarity', { name: best.character.name, percentage: best.percentage })}
           siteUrl={t('export.siteUrl')}
         />
       )}

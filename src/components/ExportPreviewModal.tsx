@@ -81,7 +81,7 @@ export default function ExportPreviewModal({ open, imageUrl, onDownload, onClose
           <button
             onClick={onDownload}
             className="flex-1 py-2.5 text-sm rounded-lg bg-terracotta text-ivory hover:opacity-90 transition-all cursor-pointer"
-            style={{ boxShadow: '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px' }}
+            style={{ boxShadow: '#b83f6d 0px 0px 0px 0px, #b83f6d 0px 0px 0px 1px' }}
           >
             {t('export.previewDownload')}
           </button>

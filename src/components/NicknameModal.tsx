@@ -86,7 +86,7 @@ export default function NicknameModal({ open, onConfirm, onClose }: NicknameModa
             onClick={handleSubmit}
             disabled={!trimmed}
             className="flex-1 py-2.5 text-sm rounded-lg bg-terracotta text-ivory hover:opacity-90 transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{ boxShadow: '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px' }}
+            style={{ boxShadow: '#b83f6d 0px 0px 0px 0px, #b83f6d 0px 0px 0px 1px' }}
           >
             {t('export.nicknameConfirm')}
           </button>

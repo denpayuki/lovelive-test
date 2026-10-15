@@ -8,30 +8,46 @@ import { calculateDimensionScores, matchCharacters } from '../utils/matching';
 import { characters } from '../data/characters';
 import type { MatchResult } from '../types';
 import { useLocale } from '../i18n';
-import type { TranslationKey } from '../i18n';
 
-const STORAGE_KEY = 'shiny-quiz-progress';
-
-const MILESTONES: Record<number, { titleKey: TranslationKey; subtitleKey: TranslationKey }> = {
-  10: { titleKey: 'milestone.10.title', subtitleKey: 'milestone.10.subtitle' },
-  20: { titleKey: 'milestone.20.title', subtitleKey: 'milestone.20.subtitle' },
-  30: { titleKey: 'milestone.30.title', subtitleKey: 'milestone.30.subtitle' },
+const STORAGE_KEY = 'lovelive-test-progress';
+type SavedProgress = {
+  answers: Record<number, number>;
+  currentIndex: number;
+  questionOrder: number[];
 };
 
-function loadSavedProgress(): { answers: Record<number, number>; currentIndex: number } | null {
+function loadSavedProgress(): SavedProgress | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
     const data = JSON.parse(raw);
     if (data && typeof data.answers === 'object' && typeof data.currentIndex === 'number') {
-      return data;
+      const savedOrder = data.questionOrder;
+      const hasValidOrder = Array.isArray(savedOrder)
+        && savedOrder.length === questions.length
+        && new Set(savedOrder).size === questions.length
+        && savedOrder.every((id: unknown) => questions.some((question) => question.id === id));
+      return {
+        answers: data.answers,
+        currentIndex: data.currentIndex,
+        questionOrder: hasValidOrder ? savedOrder : questions.map((question) => question.id),
+      };
     }
   } catch { /* ignore corrupt data */ }
   return null;
 }
 
-function saveProgress(answers: Record<number, number>, currentIndex: number) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ answers, currentIndex }));
+function saveProgress(answers: Record<number, number>, currentIndex: number, questionOrder: number[]) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ answers, currentIndex, questionOrder }));
+}
+
+function shuffledQuestionOrder() {
+  const order = questions.map((question) => question.id);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return order;
 }
 
 function clearProgress() {
@@ -42,12 +58,12 @@ export default function QuizPage() {
   const navigate = useNavigate();
   const { t } = useLocale();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [questionOrder, setQuestionOrder] = useState<number[]>([]);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [results, setResults] = useState<MatchResult[] | null>(null);
   const [started, setStarted] = useState(false);
-  const [savedProgress, setSavedProgress] = useState<{ answers: Record<number, number>; currentIndex: number } | null>(null);
+  const [savedProgress, setSavedProgress] = useState<SavedProgress | null>(null);
   const [confirmingReset, setConfirmingReset] = useState(false);
-  const [showMilestone, setShowMilestone] = useState<number | null>(null);
   const confirmTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Load saved progress on mount
@@ -66,18 +82,22 @@ export default function QuizPage() {
   }, []);
 
   const answeredCount = Object.keys(answers).length;
-  const currentQuestion = questions[currentIndex];
+  const currentQuestionId = questionOrder[currentIndex];
+  const currentQuestion = questions.find((question) => question.id === currentQuestionId);
   const isLastQuestion = currentIndex === questions.length - 1;
-  const canGoNext = answers[currentQuestion?.id] !== undefined;
+  const canGoNext = currentQuestion !== undefined && answers[currentQuestion.id] !== undefined;
   const allAnswered = answeredCount === questions.length;
 
   const handleAnswer = useCallback((value: number) => {
+    if (!currentQuestion) {
+      throw new Error('Current quiz question is missing from its saved order');
+    }
     setAnswers((prev) => {
       const next = { ...prev, [currentQuestion.id]: value };
-      saveProgress(next, currentIndex);
+      saveProgress(next, currentIndex, questionOrder);
       return next;
     });
-  }, [currentQuestion?.id, currentIndex]);
+  }, [currentQuestion?.id, currentIndex, questionOrder]);
 
   const handleNext = useCallback(() => {
     if (isLastQuestion && allAnswered) {
@@ -87,28 +107,24 @@ export default function QuizPage() {
       setResults(matchResults);
     } else if (currentIndex < questions.length - 1) {
       const nextIndex = currentIndex + 1;
-      // Check if we just crossed a milestone
-      if (MILESTONES[nextIndex] && !showMilestone) {
-        setShowMilestone(nextIndex);
-      } else {
-        setCurrentIndex(nextIndex);
-        saveProgress(answers, nextIndex);
-      }
+      setCurrentIndex(nextIndex);
+      saveProgress(answers, nextIndex, questionOrder);
     }
-  }, [isLastQuestion, allAnswered, currentIndex, answers, showMilestone]);
+  }, [isLastQuestion, allAnswered, currentIndex, answers, questionOrder]);
 
   const handlePrev = useCallback(() => {
     if (currentIndex > 0) {
       const prevIndex = currentIndex - 1;
       setCurrentIndex(prevIndex);
-      saveProgress(answers, prevIndex);
+      saveProgress(answers, prevIndex, questionOrder);
     }
-  }, [currentIndex, answers]);
+  }, [currentIndex, answers, questionOrder]);
 
   const handleRestart = useCallback(() => {
     clearProgress();
     setAnswers({});
     setCurrentIndex(0);
+    setQuestionOrder([]);
     setResults(null);
     setStarted(false);
     setSavedProgress(null);
@@ -128,10 +144,18 @@ export default function QuizPage() {
     if (savedProgress) {
       setAnswers(savedProgress.answers);
       setCurrentIndex(savedProgress.currentIndex);
+      setQuestionOrder(savedProgress.questionOrder);
       setSavedProgress(null);
       setStarted(true);
     }
   }, [savedProgress]);
+
+  const handleStart = useCallback(() => {
+    setQuestionOrder(shuffledQuestionOrder());
+    setCurrentIndex(0);
+    setAnswers({});
+    setStarted(true);
+  }, []);
 
   // Results view
   if (results) {
@@ -153,10 +177,6 @@ export default function QuizPage() {
           <h1 className="animate-fade-in-up stagger-2 font-serif-display text-4xl sm:text-5xl text-near-black dark:text-ivory mb-4" style={{ lineHeight: 1.10 }}>
             {t('landing.title')}
           </h1>
-          <p className="animate-fade-in-up stagger-2 text-base text-olive-gray dark:text-warm-silver mb-3" style={{ lineHeight: 1.60 }}>
-            {t('landing.titleJa')}
-          </p>
-
           {/* Decorative divider */}
           <div className="animate-fade-in stagger-3 flex items-center justify-center gap-3 my-8">
             <span className="block w-12 h-px bg-border-warm dark:bg-dark-warm" />
@@ -184,7 +204,7 @@ export default function QuizPage() {
                 <button
                   onClick={handleResume}
                   className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-base font-medium hover:opacity-90 transition-all cursor-pointer"
-                  style={{ boxShadow: '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px' }}
+                  style={{ boxShadow: '#b83f6d 0px 0px 0px 0px, #b83f6d 0px 0px 0px 1px' }}
                 >
                   {savedCount >= questions.length ? t('landing.viewResults') : t('landing.resume')}
                 </button>
@@ -209,9 +229,9 @@ export default function QuizPage() {
               </p>
               <div className="animate-fade-in-up stagger-4">
                 <button
-                  onClick={() => setStarted(true)}
+                  onClick={handleStart}
                   className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-base font-medium hover:opacity-90 transition-all cursor-pointer"
-                  style={{ boxShadow: '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px' }}
+                  style={{ boxShadow: '#b83f6d 0px 0px 0px 0px, #b83f6d 0px 0px 0px 1px' }}
                 >
                   {t('landing.start')}
                 </button>
@@ -231,53 +251,8 @@ export default function QuizPage() {
     );
   }
 
-  // Milestone interstitial
-  if (showMilestone !== null) {
-    const milestone = MILESTONES[showMilestone];
-    const milestonePercentage = Math.round((showMilestone / questions.length) * 100);
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-4 py-16">
-        <div className="max-w-md text-center">
-          <div className="animate-scale-in">
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <span className="block w-8 h-px bg-border-warm dark:bg-dark-warm" />
-              <span className="block w-2 h-2 rounded-full bg-terracotta" />
-              <span className="block w-8 h-px bg-border-warm dark:bg-dark-warm" />
-            </div>
-            <h2 className="font-serif-display text-2xl sm:text-3xl text-near-black dark:text-ivory mb-3" style={{ lineHeight: 1.20 }}>
-              {t(milestone.titleKey)}
-            </h2>
-            <p className="text-olive-gray dark:text-warm-silver mb-6" style={{ lineHeight: 1.60 }}>
-              {t(milestone.subtitleKey)}
-            </p>
-            <div className="max-w-xs mx-auto mb-3">
-              <div className="w-full h-2 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-terracotta rounded-full transition-all duration-700 ease-out"
-                  style={{ width: `${milestonePercentage}%` }}
-                />
-              </div>
-            </div>
-            <p className="text-sm text-stone-gray dark:text-warm-silver mb-8">
-              {t('milestone.progress', { done: showMilestone, total: questions.length })}
-            </p>
-          </div>
-          <div className="animate-fade-in-up stagger-3">
-            <button
-              onClick={() => {
-                setCurrentIndex(showMilestone);
-                saveProgress(answers, showMilestone);
-                setShowMilestone(null);
-              }}
-              className="px-8 py-3 bg-terracotta text-ivory rounded-xl text-base font-medium hover:opacity-90 transition-all cursor-pointer"
-              style={{ boxShadow: '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px' }}
-            >
-              {t('milestone.continue')}
-            </button>
-          </div>
-        </div>
-      </div>
-    );
+  if (!currentQuestion) {
+    throw new Error('Current quiz question is missing from its saved order');
   }
 
   // Quiz view
@@ -337,7 +312,7 @@ export default function QuizPage() {
           }`}
           style={{
             boxShadow: isLastQuestion && allAnswered
-              ? '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px'
+              ? '#b83f6d 0px 0px 0px 0px, #b83f6d 0px 0px 0px 1px'
               : 'var(--btn-dark-ring)'
           }}
         >

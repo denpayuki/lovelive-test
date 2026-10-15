@@ -12,20 +12,20 @@ interface CharacterCardProps {
 }
 
 const dimensionKeys: { key: DimensionKey; labelKey: TranslationKey }[] = [
-  { key: 'extraversion', labelKey: 'dim.extraversion.short' },
-  { key: 'emotionalStability', labelKey: 'dim.emotionalStability.short' },
-  { key: 'assertiveness', labelKey: 'dim.assertiveness.short' },
+  { key: 'energy', labelKey: 'dim.energy.short' },
   { key: 'warmth', labelKey: 'dim.warmth.short' },
-  { key: 'openness', labelKey: 'dim.openness.short' },
+  { key: 'drive', labelKey: 'dim.drive.short' },
   { key: 'discipline', labelKey: 'dim.discipline.short' },
-  { key: 'authenticity', labelKey: 'dim.authenticity.short' },
+  { key: 'creativity', labelKey: 'dim.creativity.short' },
+  { key: 'confidence', labelKey: 'dim.confidence.short' },
   { key: 'optimism', labelKey: 'dim.optimism.short' },
+  { key: 'independence', labelKey: 'dim.independence.short' },
 ];
 
 export default function CharacterCard({ character, rank, percentage, showDimensions }: CharacterCardProps) {
   const [imgError, setImgError] = useState(false);
-  const { t, locale } = useLocale();
-  const description = characterDescriptions[locale]?.[character.id] ?? character.description;
+  const { t } = useLocale();
+  const description = characterDescriptions[character.id];
 
   return (
     <div
@@ -39,13 +39,13 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
       <div className="relative aspect-square bg-parchment dark:bg-near-black flex items-center justify-center overflow-hidden">
         {imgError ? (
           <div className="flex flex-col items-center justify-center w-full h-full">
-            <span className="text-4xl mb-2 text-near-black dark:text-ivory">{character.nameJa.charAt(0)}</span>
+            <span className="text-4xl mb-2 text-near-black dark:text-ivory">{character.name.charAt(0)}</span>
             <span className="text-sm text-stone-gray dark:text-warm-silver">{t('charCard.noImage')}</span>
           </div>
         ) : (
           <img
             src={character.imageUrl}
-            alt={`${character.nameJa}`}
+            alt={`${character.name}`}
             className="w-full h-full object-cover object-top"
             onError={() => setImgError(true)}
           />
@@ -73,12 +73,12 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
       {/* Info */}
       <div className="p-5">
         <h3 className="font-serif-display text-lg text-near-black dark:text-ivory" style={{ lineHeight: 1.20 }}>
-          {character.nameJa}
+          {character.name}
         </h3>
         <div className="flex items-center gap-2 mt-1.5 mb-3">
           <span
             className="inline-block w-2.5 h-2.5 rounded-full"
-            style={{ backgroundColor: character.unitColor }}
+            style={{ backgroundColor: character.color }}
             aria-hidden="true"
           />
           <span className="text-sm text-olive-gray dark:text-warm-silver">{character.unit}</span>
@@ -103,19 +103,19 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
                     className="flex-1 h-1.5 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden"
                     role="meter"
                     aria-label={label}
-                    aria-valuenow={character.dimensions[key]}
+                    aria-valuenow={character.scores[key]}
                     aria-valuemin={0}
                     aria-valuemax={10}
                   >
                     <div
                       className="h-full bg-terracotta rounded-full"
                       style={{
-                        width: `${character.dimensions[key] * 10}%`,
-                        opacity: 0.5 + (character.dimensions[key] / 10) * 0.5,
+                        width: `${character.scores[key] * 10}%`,
+                        opacity: 0.5 + (character.scores[key] / 10) * 0.5,
                       }}
                     />
                   </div>
-                  <span className="w-5 text-right text-stone-gray dark:text-warm-silver">{character.dimensions[key]}</span>
+                  <span className="w-5 text-right text-stone-gray dark:text-warm-silver">{character.scores[key]}</span>
                 </div>
               );
             })}

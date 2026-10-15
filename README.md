@@ -1,8 +1,8 @@
 <div align="center">
 
-# ✦ ShinyColors Personality Quiz ✦
+# ✦ Love Live! Nijigasaki Personality Quiz ✦
 
-### *Which ShinyColors idol are you?*
+### *Which Nijigasaki character are you most like?*
 
 [![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -10,204 +10,78 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-ef9421?logo=creativecommons&logoColor=white)](./LICENSE)
 
-**[中文文档](./README_CN.md)**
-
 <br/>
 
-A web-based personality quiz that matches you with one of the 28 idols from<br/>**THE iDOLM@STER: Shiny Colors** based on an 8-dimension personality model.
+A web-based personality quiz matching your answers with one of 12 Nijigasaki characters
+using an eight-dimension personality model.
 
 </div>
 
 ---
 
-## ✦ What Is This?
+## About
 
-A fun personality test inspired by the characters of ShinyColors (シャイニーカラーズ). Answer **35 questions** about your personality, and the app calculates which idol you're most similar to using an **8-dimension matching algorithm** with Euclidean distance scoring.
+Answer **40 personality questions** to see which Nijigasaki High School Idol Club character best matches your personality. The quiz scores answers across eight dimensions and uses Euclidean distance to rank the character matches.
 
-### The 8 Personality Dimensions
+The dimensions are **Energy, Warmth, Drive, Discipline, Creativity, Confidence, Optimism,** and **Independence**. Results are for entertainment, not a psychological assessment.
 
-| Dimension | What It Measures |
-|:--|:--|
-| **Extraversion** | Social energy — do you recharge around people or alone? |
-| **Emotional Stability** | Stress resilience — do you stay calm under pressure? |
-| **Assertiveness** | Leadership drive — do you speak up and take charge? |
-| **Warmth** | Caring tendency — do you prioritize others' needs? |
-| **Openness** | Curiosity — do you enjoy exploring new ideas? |
-| **Discipline** | Self-control — do you set goals and stick to them? |
-| **Authenticity** | True-to-self — do you show the same face everywhere? |
-| **Optimism** | Outlook — do you tend to see the bright side? |
+## Features
 
-### All 8 Units — 28 Characters
+- 40 questions with a seven-point agree/disagree scale
+- Eight-dimension personality profile and ranked character matches
+- Radar-chart comparison with your best match
+- Gallery of all 12 Nijigasaki characters
+- Shareable result image export
+- English interface and dark/light themes
+- Responsive layout for mobile and desktop
 
-> | Unit | Members |
-> |:--|:--|
-> | **illumination STARS** | Mano · Hiori · Meguru |
-> | **L'Antica** | Kogane · Sakuya · Mamimi · Yuika · Kiriko |
-> | **ALSTROEMERIA** | Amana · Tenka · Chiyuki |
-> | **Houkago Climax Girls** | Kaho · Chiyoko · Juri · Rinze · Natsuha |
-> | **Straylight** | Asahi · Fuyuko · Mei |
-> | **noctchill** | Toru · Madoka · Koito · Hinana |
-> | **SHHis** | Nichika · Mikoto |
-> | **CoMETIK** | Ruka · Hana · Haruki |
+## Getting Started
 
----
+### Requirements
 
-## ✦ Features
+- Node.js 18 or later
+- npm
 
-- **35 Likert-scale questions** with an intuitive 7-point agree/disagree selector
-- **8-dimension personality profiling** — goes beyond simple type categories
-- **Euclidean distance matching** against 28 hand-scored character profiles
-- **Top 3 results** with percentage-based similarity scores
-- **Radar chart comparison** — visualize your profile vs. your best match
-- **Character encyclopedia** — browse all 28 characters by unit with expandable dimension bars
-- **Result image export** — save and share your result as a shareable PNG card
-- **Trilingual UI** — Chinese, English, and Japanese with auto-detection
-- **Dark / Light mode** — automatic persistence across sessions
-- **Fully responsive** — works on mobile, tablet, and desktop
-
----
-
-## ✦ Getting Started
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) version 18+
-- [npm](https://www.npmjs.com/) (bundled with Node.js)
-
-> **How to check:** Run `node -v && npm -v` in your terminal. If you see version numbers, you're all set.
-
-### Installation
+### Install and run
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/Sallyn0225/shiny-mbti.git
-
-# 2. Navigate into the project
-cd shiny-mbti
-
-# 3. Install dependencies
+git clone https://github.com/denpayuki/lovelive-test.git
+cd lovelive-test
 npm install
-
-# 4. Start the dev server
 npm run dev
 ```
 
-Open `http://localhost:5173` in your browser and start the quiz!
+Open the local URL shown by Vite, usually `http://localhost:5173`.
 
-### Building for Production
+### Build
 
 ```bash
-npm run build     # Output → dist/
-npm run preview   # Preview the production build locally
+npm run build
+npm run preview
 ```
 
-### Deployment
+## Deployment
 
-This project can be deployed to any static hosting platform. Step-by-step guides:
+This is a Vite single-page app and can be hosted on static platforms:
 
-- [Deploy to Cloudflare Pages](./docs/cloudflare-pages-deploy.md)
-- [Deploy to Vercel](./docs/vercel-deploy.md)
+- [Cloudflare Pages](./docs/cloudflare-pages-deploy.md)
+- [Vercel](./docs/vercel-deploy.md)
 
----
+## Project Structure
 
-## ✦ Project Structure
-
-```
-shiny-mbti/
-├── src/
-│   ├── components/          # React UI components
-│   │   ├── QuizPage.tsx           Landing → questions → results flow
-│   │   ├── ResultPage.tsx         Top matches + radar chart
-│   │   ├── ExportCard.tsx         Shareable result card (off-screen)
-│   │   ├── ExportPreviewModal.tsx Export preview & download modal
-│   │   ├── NicknameModal.tsx      Nickname input before export
-│   │   ├── CharacterCard.tsx      Character info card
-│   │   ├── CharacterListPage.tsx  Browse all 28 characters
-│   │   ├── QuestionCard.tsx       Single question display
-│   │   ├── LikertScale.tsx        7-point selector
-│   │   ├── ProgressBar.tsx        Quiz progress indicator
-│   │   ├── ThemeToggle.tsx        Dark/light mode switch
-│   │   ├── LocaleToggle.tsx       Language switcher (zh/en/ja)
-│   │   └── DisclaimerModal.tsx    About / disclaimer dialog
-│   ├── i18n/                # Internationalization
-│   │   ├── index.tsx             LocaleProvider & useLocale hook
-│   │   ├── questions.ts          Translated question text
-│   │   └── locales/              zh.ts · en.ts · ja.ts
-│   ├── data/                # Static data
-│   │   ├── characters.ts         28 character profiles & scores
-│   │   ├── questions.ts          35 quiz questions
-│   │   └── dimensions.ts         8 dimension definitions
-│   ├── utils/
-│   │   ├── matching.ts           Scoring & Euclidean distance
-│   │   └── exportImage.ts        DOM-to-PNG capture utilities
-│   ├── contexts/ThemeContext.tsx
-│   ├── types/index.ts
-│   ├── App.tsx              # Router setup
-│   └── index.css            # Tailwind + global styles
-├── public/                  # Static assets
-├── index.html
-└── vite.config.ts
+```text
+src/
+├── components/       React pages, quiz controls, character cards, and export UI
+├── contexts/         Theme context
+├── data/             Character profiles, questions, and dimension definitions
+├── i18n/             English interface and character descriptions
+├── types/            Shared TypeScript types
+└── utils/            Matching algorithm and image export helpers
+public/sprite/        Local character image assets
 ```
 
----
+## Credits and Rights
 
-## ✦ Tech Stack
+This project is adapted from [ShinyColors Personality Quiz](https://github.com/Sallyn0225/shiny-mbti). The source project's code is provided under the [CC BY-NC-SA 4.0 license](./LICENSE); this attribution does not imply endorsement.
 
-<table>
-  <tr>
-    <td align="center"><img src="https://img.shields.io/badge/-React_19-61dafb?style=flat-square&logo=react&logoColor=white" /></td>
-    <td>UI framework</td>
-  </tr>
-  <tr>
-    <td align="center"><img src="https://img.shields.io/badge/-TypeScript_6-3178c6?style=flat-square&logo=typescript&logoColor=white" /></td>
-    <td>Type safety</td>
-  </tr>
-  <tr>
-    <td align="center"><img src="https://img.shields.io/badge/-Vite_8-646cff?style=flat-square&logo=vite&logoColor=white" /></td>
-    <td>Build tool & dev server</td>
-  </tr>
-  <tr>
-    <td align="center"><img src="https://img.shields.io/badge/-Tailwind_CSS_4-06b6d4?style=flat-square&logo=tailwindcss&logoColor=white" /></td>
-    <td>Utility-first styling</td>
-  </tr>
-  <tr>
-    <td align="center"><img src="https://img.shields.io/badge/-Recharts-ff7300?style=flat-square&logo=data:image/svg+xml;base64,&logoColor=white" /></td>
-    <td>Radar chart visualization</td>
-  </tr>
-  <tr>
-    <td align="center"><img src="https://img.shields.io/badge/-React_Router_7-ca4245?style=flat-square&logo=reactrouter&logoColor=white" /></td>
-    <td>Client-side routing</td>
-  </tr>
-  <tr>
-    <td align="center"><img src="https://img.shields.io/badge/-modern--screenshot-333?style=flat-square" /></td>
-    <td>Result image export</td>
-  </tr>
-</table>
-
----
-
-## ✦ Friend Links
-
-- [Gakuen Idolmaster MBTI Test](https://jcver.github.io/Gakumas-idolmaster-MBTI-test/) — A personality quiz based on Gakuen Idolmaster characters
-
----
-
-## ✦ Copyright Notice
-
-### Code
-
-The source code of this project is licensed under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license. See [LICENSE](./LICENSE) for details.
-
-### Character IP
-
-**THE iDOLM@STER: Shiny Colors** and all related characters, names, and artwork are the property of **Bandai Namco Entertainment Inc.**
-
-This is a fan-made project and is not affiliated with, endorsed by, or sponsored by Bandai Namco Entertainment Inc.
-
----
-
-<div align="center">
-
-Made with ♥ for Producers everywhere
-
-</div>
+Love Live!, Nijigasaki High School Idol Club, their characters, and related artwork belong to their respective rights holders. The code license does not grant rights to those franchise materials or character images. This is an unofficial fan project and is not affiliated with or endorsed by the official rights holders.

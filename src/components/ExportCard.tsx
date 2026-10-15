@@ -15,8 +15,8 @@ interface ExportCardProps {
 }
 
 const dimensionOrder: DimensionKey[] = [
-  'extraversion', 'emotionalStability', 'assertiveness', 'warmth',
-  'openness', 'discipline', 'authenticity', 'optimism',
+  'energy', 'warmth', 'drive', 'discipline',
+  'creativity', 'confidence', 'optimism', 'independence',
 ];
 
 const ExportCard = forwardRef<HTMLDivElement, ExportCardProps>(function ExportCard(
@@ -64,9 +64,9 @@ const ExportCard = forwardRef<HTMLDivElement, ExportCardProps>(function ExportCa
           {brandText}
         </div>
 
-        {/* Headline: "{nickname}的283人格是" */}
+        {/* Headline */}
         <div style={{ fontSize: '40px', fontWeight: 500, color: '#141413', lineHeight: 1.20, marginBottom: '32px' }}>
-          <span style={{ color: '#b45535' }}>{nickname}</span>
+          <span style={{ color: '#b83f6d' }}>{nickname}</span>
           <span> {headlineSuffix}</span>
         </div>
 
@@ -90,17 +90,17 @@ const ExportCard = forwardRef<HTMLDivElement, ExportCardProps>(function ExportCa
               {!imgError ? (
                 <img
                   src={imageSrc}
-                  alt={character.nameJa}
+                  alt={character.name}
                   crossOrigin="anonymous"
                   onError={() => setImgError(true)}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
                 />
               ) : (
-                <span style={{ fontSize: '64px', color: '#141413' }}>{character.nameJa.charAt(0)}</span>
+                <span style={{ fontSize: '64px', color: '#141413' }}>{character.name.charAt(0)}</span>
               )}
             </div>
-            <div style={{ marginTop: '16px', fontSize: '28px', fontWeight: 500, color: '#b45535' }}>
-              {character.nameJa}
+            <div style={{ marginTop: '16px', fontSize: '28px', fontWeight: 500, color: '#b83f6d' }}>
+              {character.name}
             </div>
           </div>
 
@@ -134,7 +134,7 @@ const ExportCard = forwardRef<HTMLDivElement, ExportCardProps>(function ExportCa
                       <div style={{
                         height: '100%',
                         width: `${pct}%`,
-                        backgroundColor: '#b45535',
+                        backgroundColor: '#b83f6d',
                         borderRadius: '10px',
                         opacity: 0.7 + (score / 10) * 0.3,
                       }} />
@@ -164,7 +164,7 @@ const ExportCard = forwardRef<HTMLDivElement, ExportCardProps>(function ExportCa
                   return (
                     <>
                       {similarityText.slice(0, idx)}
-                      <span style={{ color: '#b45535' }}>{pctStr}</span>
+                      <span style={{ color: '#b83f6d' }}>{pctStr}</span>
                       {similarityText.slice(idx + pctStr.length)}
                     </>
                   );

@@ -27,53 +27,10 @@ function blobToDataUrl(blob: Blob): Promise<string> {
   });
 }
 
-const R2_ORIGIN = 'https://assets.sallyn.top';
-const PROXY_PREFIX = '/r2-assets';
-
-/** In dev mode, rewrite R2 URLs to go through the Vite proxy (bypasses CORS). */
-function proxyUrl(url: string): string {
-  if (import.meta.env.DEV && url.startsWith(R2_ORIGIN)) {
-    return url.replace(R2_ORIGIN, PROXY_PREFIX);
-  }
-  return url;
-}
-
 export async function fetchImageAsDataUrl(url: string): Promise<string> {
-  // Approach 1: fetch (uses Vite proxy in dev, direct in prod)
-  try {
-    const res = await fetch(proxyUrl(url), { cache: 'no-store' });
-    if (res.ok) {
-      const blob = await res.blob();
-      return await blobToDataUrl(blob);
-    }
-  } catch { /* CORS or network error, try next approach */ }
-
-  // Approach 2: direct fetch without proxy (prod fallback)
-  try {
-    const res = await fetch(url, { cache: 'no-store' });
-    if (res.ok) {
-      const blob = await res.blob();
-      return await blobToDataUrl(blob);
-    }
-  } catch { /* try next */ }
-
-  // Approach 3: Image element + Canvas
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      try {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        const ctx = canvas.getContext('2d')!;
-        ctx.drawImage(img, 0, 0);
-        resolve(canvas.toDataURL('image/png'));
-      } catch {
-        reject(new Error('Canvas tainted — CORS not supported by image server'));
-      }
-    };
-    img.onerror = () => reject(new Error('Image load failed'));
-    img.src = url + (url.includes('?') ? '&' : '?') + '_t=' + Date.now();
-  });
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) {
+    throw new Error(`Image request failed: ${res.status} ${res.statusText}`);
+  }
+  return blobToDataUrl(await res.blob());
 }

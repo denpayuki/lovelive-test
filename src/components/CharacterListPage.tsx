@@ -4,16 +4,7 @@ import { characters } from '../data/characters';
 import CharacterCard from './CharacterCard';
 import { useLocale } from '../i18n';
 
-const units = [
-  'illumination STARS',
-  "L'Antica",
-  'ALSTROEMERIA',
-  '放課後クライマックスガールズ',
-  'Straylight',
-  'noctchill',
-  'SHHis',
-  'CoMETIK',
-];
+const units = ['Nijigasaki'];
 
 export default function CharacterListPage() {
   const navigate = useNavigate();
@@ -43,7 +34,7 @@ export default function CharacterListPage() {
             <button
               onClick={() => navigate('/')}
               className="px-5 py-2.5 text-sm rounded-lg bg-terracotta text-ivory hover:opacity-90 transition-all cursor-pointer"
-              style={{ boxShadow: '#b45535 0px 0px 0px 0px, #b45535 0px 0px 0px 1px' }}
+              style={{ boxShadow: '#b83f6d 0px 0px 0px 0px, #b83f6d 0px 0px 0px 1px' }}
             >
               {t('charList.start')}
             </button>
@@ -53,7 +44,7 @@ export default function CharacterListPage() {
         {/* Units */}
         {units.map((unit) => {
           const unitCharacters = characters.filter((c) => c.unit === unit);
-          const unitColor = unitCharacters[0]?.unitColor || '#87867f';
+          const unitColor = '#b83f6d';
 
           return (
             <section key={unit} className="mb-12">
@@ -79,8 +70,8 @@ export default function CharacterListPage() {
                       tabIndex={0}
                       aria-expanded={isExpanded}
                       aria-label={isExpanded
-                        ? t('charList.ariaCollapse', { name: char.nameJa })
-                        : t('charList.ariaExpand', { name: char.nameJa })
+                        ? t('charList.ariaCollapse', { name: char.name })
+                        : t('charList.ariaExpand', { name: char.name })
                       }
                       onClick={() => setExpandedId(isExpanded ? null : char.id)}
                       onKeyDown={(e) => {

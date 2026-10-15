@@ -8,13 +8,13 @@ interface LikertScaleProps {
 }
 
 const optionMeta: { value: number; labelKey: TranslationKey; size: string; bg: string }[] = [
-  { value: 7, labelKey: 'likert.7', size: 'w-9 h-9 sm:w-12 sm:h-12', bg: '#b45535' },
-  { value: 6, labelKey: 'likert.6', size: 'w-8 h-8 sm:w-10 sm:h-10', bg: '#d97757' },
-  { value: 5, labelKey: 'likert.5', size: 'w-7 h-7 sm:w-9 sm:h-9', bg: '#e0a08a' },
+  { value: 7, labelKey: 'likert.7', size: 'w-9 h-9 sm:w-12 sm:h-12', bg: '#4f765e' },
+  { value: 6, labelKey: 'likert.6', size: 'w-8 h-8 sm:w-10 sm:h-10', bg: '#739679' },
+  { value: 5, labelKey: 'likert.5', size: 'w-7 h-7 sm:w-9 sm:h-9', bg: '#a3b99d' },
   { value: 4, labelKey: 'likert.4', size: 'w-6 h-6 sm:w-8 sm:h-8', bg: '#d1cfc5' },
-  { value: 3, labelKey: 'likert.3', size: 'w-7 h-7 sm:w-9 sm:h-9', bg: '#b0aea5' },
-  { value: 2, labelKey: 'likert.2', size: 'w-8 h-8 sm:w-10 sm:h-10', bg: '#87867f' },
-  { value: 1, labelKey: 'likert.1', size: 'w-9 h-9 sm:w-12 sm:h-12', bg: '#5e5d59' },
+  { value: 3, labelKey: 'likert.3', size: 'w-7 h-7 sm:w-9 sm:h-9', bg: '#e2a0a0' },
+  { value: 2, labelKey: 'likert.2', size: 'w-8 h-8 sm:w-10 sm:h-10', bg: '#ce7580' },
+  { value: 1, labelKey: 'likert.1', size: 'w-9 h-9 sm:w-12 sm:h-12', bg: '#b83f58' },
 ];
 
 export default function LikertScale({ value, onChange }: LikertScaleProps) {

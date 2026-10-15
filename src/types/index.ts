@@ -1,42 +1,52 @@
-export interface DimensionScores {
-  extraversion: number;
-  emotionalStability: number;
-  assertiveness: number;
-  warmth: number;
-  openness: number;
-  discipline: number;
-  authenticity: number;
-  optimism: number;
+// ========== Dimension Keys ==========
+export type DimensionKey =
+  | "energy"
+  | "warmth"
+  | "drive"
+  | "discipline"
+  | "creativity"
+  | "confidence"
+  | "optimism"
+  | "independence";
+
+// ========== Scores ==========
+export type DimensionScores = {
+  [K in DimensionKey]: number; // 1–10
+};
+
+// ========== Dimension Metadata ==========
+export interface DimensionMeta {
+  key: DimensionKey;
+  label: string;
+  description: string;
+  highLabel: string;
+  lowLabel: string;
 }
 
-export type DimensionKey = keyof DimensionScores;
-
+// ========== Character ==========
 export interface CharacterProfile {
   id: number;
+  name: string;
   nameJa: string;
-  nameCn: string;
   unit: string;
-  unitColor: string;
-  description: string;
+  color: string;
+  scores: DimensionScores;
+  // Optional fields you can add later:
+  // description?: string;
   imageUrl: string;
-  dimensions: DimensionScores;
 }
 
+// ========== Question ==========
 export interface Question {
   id: number;
-  text: string;
+  text: {
+    en: string;
+  };
   dimension: DimensionKey;
   reversed: boolean;
 }
 
-export interface DimensionMeta {
-  key: DimensionKey;
-  label: string;
-  labelJa: string;
-  shortLabel: string;
-  description: string;
-}
-
+// ========== Match Result ==========
 export interface MatchResult {
   character: CharacterProfile;
   distance: number;
