@@ -64,9 +64,6 @@ npm run preview
 
 This is a Vite single-page app and can be hosted on static platforms:
 
-- [Cloudflare Pages](./docs/cloudflare-pages-deploy.md)
-- [Vercel](./docs/vercel-deploy.md)
-
 ## Project Structure
 
 ```text
