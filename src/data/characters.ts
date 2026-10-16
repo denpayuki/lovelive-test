@@ -377,7 +377,7 @@ export const characters: CharacterProfile[] = [
       warmth: 7,
       drive: 6,
       discipline: 8,
-      creativity: 7,
+      creativity: 8,
       confidence: 6,
       optimism: 6,
       independence: 6,
