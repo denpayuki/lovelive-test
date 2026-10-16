@@ -55,7 +55,7 @@ export function calculateDimensionScores(answers: Record<number, number>): Dimen
   for (const key of dimensionKeys) {
     if (counts[key] > 0) {
       const avg = scores[key] / counts[key]; // range 1-7
-      scores[key] = Math.round(((avg - 1) / 6) * 9 + 1); // map to 1-10
+      scores[key] = ((avg - 1) / 6) * 9 + 1; // map to 1-10
     }
   }
 
