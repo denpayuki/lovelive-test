@@ -11,6 +11,7 @@ import ExportCard from './ExportCard';
 import ExportPreviewModal from './ExportPreviewModal';
 import { useLocale } from '../i18n';
 import type { TranslationKey } from '../i18n';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface ResultPageProps {
   results: MatchResult[];
@@ -49,9 +50,14 @@ const dimShortKeys: Record<DimensionKey, TranslationKey> = {
 export default function ResultPage({ results, answers, confirmingReset, onConfirmReset }: ResultPageProps) {
   const navigate = useNavigate();
   const { t } = useLocale();
+  const { theme } = useTheme();
   const top3 = results.slice(0, 3);
   const best = top3[0];
   const userScores = calculateDimensionScores(answers);
+  const displayedUserScores = dimensionOrder.reduce((scores, key) => {
+    scores[key] = Math.ceil(userScores[key]);
+    return scores;
+  }, { ...userScores });
   const [nicknameModalOpen, setNicknameModalOpen] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [exportNickname, setExportNickname] = useState('');
@@ -107,7 +113,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
   const radarData = dimensionOrder.map((key) => {
     return {
       dimension: t(dimShortKeys[key]),
-      [userLabel]: userScores[key],
+      [userLabel]: displayedUserScores[key],
       [best.character.name]: best.character.scores[key],
     };
   });
@@ -145,17 +151,17 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
         </div>
       </div>
 
-      {/* Dark section — Radar Chart */}
-      <div className="bg-near-black px-4 py-16">
+      {/* Radar Chart */}
+      <div className="bg-parchment dark:bg-near-black px-4 py-16 transition-colors">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif-display text-xl text-ivory mb-6 text-center" style={{ lineHeight: 1.20 }}>
+          <h2 className="font-serif-display text-xl text-near-black dark:text-ivory mb-6 text-center" style={{ lineHeight: 1.20 }}>
             {t('result.radarTitle')}
           </h2>
-          <div className="rounded-2xl p-3 sm:p-6" style={{ backgroundColor: '#30302e', border: '1px solid #30302e' }}>
+          <div className="rounded-2xl p-3 sm:p-6 bg-ivory dark:bg-dark-surface transition-colors" style={{ border: '1px solid var(--card-border-color)' }}>
             <ResponsiveContainer width="100%" height={420}>
               <RadarChart data={radarData} margin={{ top: 15, right: 35, bottom: 15, left: 35 }}>
-                <PolarGrid stroke="#4d4c48" />
-                <PolarAngleAxis dataKey="dimension" tick={{ fontSize: 11, fill: '#b0aea5' }} />
+                <PolarGrid stroke={theme === 'dark' ? '#4d4c48' : '#dedbd1'} />
+                <PolarAngleAxis dataKey="dimension" tick={{ fontSize: 11, fill: theme === 'dark' ? '#b0aea5' : '#6e6d67' }} />
                 <PolarRadiusAxis angle={90} orientation="left" axisLine={false} domain={[0, 10]} ticks={[3, 6, 10]} tick={false} />
                 <Radar
                   name={userLabel}
@@ -168,12 +174,12 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
                 <Radar
                   name={best.character.name}
                   dataKey={best.character.name}
-                  stroke="#b0aea5"
-                  fill="#b0aea5"
+                  stroke={best.character.color}
+                  fill={best.character.color}
                   fillOpacity={0.15}
                   strokeWidth={2}
                 />
-                <Legend wrapperStyle={{ fontSize: 13, color: '#b0aea5' }} />
+                <Legend wrapperStyle={{ fontSize: 13, color: theme === 'dark' ? '#b0aea5' : '#6e6d67' }} />
               </RadarChart>
             </ResponsiveContainer>
           </div>
@@ -225,10 +231,10 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
                     <div className="flex-1 h-2 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden">
                       <div
                         className="h-full bg-terracotta rounded-full transition-all duration-500"
-                        style={{ width: `${userScores[dim.key] * 10}%`, opacity: 0.7 + (userScores[dim.key] / 10) * 0.3 }}
+                        style={{ width: `${displayedUserScores[dim.key] * 10}%`, opacity: 0.7 + (displayedUserScores[dim.key] / 10) * 0.3 }}
                       />
                     </div>
-                    <span className="w-6 text-right text-sm text-stone-gray dark:text-warm-silver">{userScores[dim.key]}</span>
+                    <span className="w-6 text-right text-sm text-stone-gray dark:text-warm-silver">{displayedUserScores[dim.key]}</span>
                   </div>
                 );
               })}
@@ -294,7 +300,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
           ref={exportCardRef}
           nickname={exportNickname}
           character={best.character}
-          userScores={userScores}
+          userScores={displayedUserScores}
           percentage={best.percentage}
           dimensionLabels={dimensionLabels}
           characterImageDataUrl={charImageDataUrl}
