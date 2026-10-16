@@ -114,7 +114,7 @@ const ExportCard = forwardRef<HTMLDivElement, ExportCardProps>(function ExportCa
                 return (
                   <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                     <span style={{
-                      width: '80px',
+                      width: '112px',
                       fontSize: '17px',
                       color: '#5e5d59',
                       flexShrink: 0,

@@ -21,7 +21,7 @@ export const questions: Question[] = [
   {
     id: 3,
     text: {
-      en: "When I’m at an event, I naturally end up talking to a lot of different people.",
+      en: "I can comfortably move from one social interaction to another without needing a quiet break.",
     },
     dimension: "energy",
     reversed: false,
@@ -55,7 +55,7 @@ export const questions: Question[] = [
   {
     id: 7,
     text: {
-      en: "I find it easy to put other people’s feelings ahead of my own.",
+      en: "I make an effort to respond with kindness when someone shares something personal with me.",
     },
     dimension: "warmth",
     reversed: false,
@@ -79,7 +79,7 @@ export const questions: Question[] = [
   {
     id: 10,
     text: {
-      en: "I prefer solving problems logically rather than focusing on emotions.",
+      en: "I find it difficult to show compassion toward people whose problems I cannot relate to.",
     },
     dimension: "warmth",
     reversed: true,
@@ -121,7 +121,7 @@ export const questions: Question[] = [
   {
     id: 15,
     text: {
-      en: "I often lose interest once something stops feeling challenging.",
+      en: "I enjoy measuring my progress against clear standards of achievement.",
     },
     dimension: "drive",
     reversed: false,
@@ -155,7 +155,7 @@ export const questions: Question[] = [
   {
     id: 19,
     text: {
-      en: "Deadlines and rules help me work better rather than restrict me.",
+      en: "I usually take care of routine responsibilities before moving on to more enjoyable activities.",
     },
     dimension: "discipline",
     reversed: false,
@@ -215,7 +215,7 @@ export const questions: Question[] = [
   {
     id: 26,
     text: {
-      en: "I usually feel comfortable being the center of attention.",
+      en: "I am comfortable taking responsibility for the quality of my own work.",
     },
     dimension: "confidence",
     reversed: false,
@@ -239,7 +239,7 @@ export const questions: Question[] = [
   {
     id: 29,
     text: {
-      en: "I tend to stay in the background rather than stand out.",
+      en: "I tend to downplay my accomplishments when talking about them with others.",
     },
     dimension: "confidence",
     reversed: true,
@@ -307,7 +307,7 @@ export const questions: Question[] = [
   {
     id: 37,
     text: {
-      en: "I feel most comfortable when I’m part of a close-knit group.",
+      en: "I prefer to figure things out for myself before asking others for help.",
     },
     dimension: "independence",
     reversed: true,
@@ -331,7 +331,7 @@ export const questions: Question[] = [
   {
     id: 40,
     text: {
-      en: "I value having my own space and freedom more than belonging.",
+      en: "I am comfortable pursuing a personal project without needing others to participate.",
     },
     dimension: "independence",
     reversed: false,
