@@ -49,7 +49,7 @@ const ExportCard = forwardRef<HTMLDivElement, ExportCardProps>(function ExportCa
         ref={ref}
         style={{
           width: '1200px',
-          height: '900px',
+          height: '700px',
           backgroundColor: '#f5f4ed',
           fontFamily: "Georgia, 'Times New Roman', serif",
           overflow: 'hidden',
