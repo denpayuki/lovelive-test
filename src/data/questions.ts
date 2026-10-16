@@ -310,7 +310,7 @@ export const questions: Question[] = [
       en: "I prefer to figure things out for myself before asking others for help.",
     },
     dimension: "independence",
-    reversed: true,
+    reversed: false,
   },
   {
     id: 38,
