@@ -4,11 +4,10 @@ import { characters } from '../data/characters';
 import CharacterCard from './CharacterCard';
 import { useLocale } from '../i18n';
 
-const units = [...new Set(characters.map((character) => character.unit))].sort((a, b) => {
-  if (a === "μ's") return -1;
-  if (b === "μ's") return 1;
-  return 0;
-});
+const unitOrder = ["μ's", "Aqours", "Nijigasaki"];
+const units = [...new Set(characters.map((character) => character.unit))].sort(
+  (a, b) => unitOrder.indexOf(a) - unitOrder.indexOf(b),
+);
 
 export default function CharacterListPage() {
   const navigate = useNavigate();
