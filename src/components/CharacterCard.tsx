@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { CharacterProfile, DimensionKey } from '../types';
 import { useLocale } from '../i18n';
 import type { TranslationKey } from '../i18n';
-import { characterDescriptions } from '../i18n/questions';
+import { characterDescriptions } from '../i18n/description';
 
 interface CharacterCardProps {
   character: CharacterProfile;

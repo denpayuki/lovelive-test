@@ -1,8 +1,8 @@
 <div align="center">
 
-# ✦ Love Live! Nijigasaki Personality Quiz ✦
+# ✦ Love Live! Personality Quiz ✦
 
-### *Which Nijigasaki character are you most like?*
+### *Which Love Live! character are you most like?*
 
 [![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -12,7 +12,7 @@
 
 <br/>
 
-A web-based personality quiz matching your answers with one of 12 Nijigasaki characters
+A web-based personality quiz matching your answers with one of Love Live! characters
 using an eight-dimension personality model.
 
 </div>
@@ -21,7 +21,7 @@ using an eight-dimension personality model.
 
 ## About
 
-Answer **40 personality questions** to see which Nijigasaki High School Idol Club character best matches your personality. The quiz scores answers across eight dimensions and uses Euclidean distance to rank the character matches.
+Answer **40 personality questions** to see which Love Live! character best matches your personality. The quiz scores answers across eight dimensions and uses Euclidean distance to rank the character matches.
 
 The dimensions are **Energy, Warmth, Drive, Discipline, Creativity, Confidence, Optimism,** and **Independence**. Results are for entertainment, not a psychological assessment.
 
@@ -30,7 +30,7 @@ The dimensions are **Energy, Warmth, Drive, Discipline, Creativity, Confidence, 
 - 40 questions with a seven-point agree/disagree scale
 - Eight-dimension personality profile and ranked character matches
 - Radar-chart comparison with your best match
-- Gallery of all 12 Nijigasaki characters
+- Gallery of Love Live! characters
 - Shareable result image export
 - English interface and dark/light themes
 - Responsive layout for mobile and desktop

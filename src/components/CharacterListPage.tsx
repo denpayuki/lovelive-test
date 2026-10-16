@@ -4,7 +4,11 @@ import { characters } from '../data/characters';
 import CharacterCard from './CharacterCard';
 import { useLocale } from '../i18n';
 
-const units = ['Nijigasaki'];
+const units = [...new Set(characters.map((character) => character.unit))].sort((a, b) => {
+  if (a === "μ's") return -1;
+  if (b === "μ's") return 1;
+  return 0;
+});
 
 export default function CharacterListPage() {
   const navigate = useNavigate();
@@ -28,7 +32,7 @@ export default function CharacterListPage() {
                 {t('charList.title')}
               </h1>
               <p className="text-sm text-olive-gray dark:text-warm-silver mt-2" style={{ lineHeight: 1.60 }}>
-                {t('charList.subtitle')}
+                {t('charList.subtitle', { count: characters.length })}
               </p>
             </div>
             <button
@@ -43,7 +47,9 @@ export default function CharacterListPage() {
 
         {/* Units */}
         {units.map((unit) => {
-          const unitCharacters = characters.filter((c) => c.unit === unit);
+          const unitCharacters = characters
+            .filter((character) => character.unit === unit)
+            .sort((a, b) => a.id - b.id);
           const unitColor = '#b83f6d';
 
           return (
