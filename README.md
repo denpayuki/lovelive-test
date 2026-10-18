@@ -62,7 +62,7 @@ npm run preview
 
 ## Deployment
 
-This is a Vite single-page app and can be hosted on static platforms:
+This is a Vite single-page app and can be hosted on static platforms.
 
 ## Project Structure
 
