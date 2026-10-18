@@ -377,7 +377,7 @@ export const characters: CharacterProfile[] = [
       warmth: 7,
       drive: 6,
       discipline: 8,
-      creativity: 7,
+      creativity: 8,
       confidence: 6,
       optimism: 6,
       independence: 6,
@@ -546,6 +546,7 @@ export const characters: CharacterProfile[] = [
     },
     imageUrl: "/sprite/lanzhu.webp",
   },
+<<<<<<< HEAD
 /// === Liella ===
 
   {
@@ -747,3 +748,6 @@ export const characters: CharacterProfile[] = [
     imageUrl: "/sprite/tomari.png",
   },
 ]
+=======
+]
+>>>>>>> a92de996598bf7868fcd71a27e361d59905e5700
