@@ -546,8 +546,7 @@ export const characters: CharacterProfile[] = [
     },
     imageUrl: "/sprite/lanzhu.webp",
   },
-<<<<<<< HEAD
-/// === Liella ===
+  // === Liella! ===
 
   {
     id: 31,
@@ -747,7 +746,4 @@ export const characters: CharacterProfile[] = [
     },
     imageUrl: "/sprite/tomari.png",
   },
-]
-=======
-]
->>>>>>> a92de996598bf7868fcd71a27e361d59905e5700
+];
