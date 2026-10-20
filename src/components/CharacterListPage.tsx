@@ -4,7 +4,7 @@ import { characters } from '../data/characters';
 import CharacterCard from './CharacterCard';
 import { useLocale } from '../i18n';
 
-const unitOrder = ["μ's", "Aqours", "Nijigasaki", "Liella!", "Hasunosora"];
+const unitOrder = ["μ's", "Aqours", "Nijigasaki", "Liella!", "Hasunosora", "Ikizurai-bu!"];
 const units = [...new Set(characters.map((character) => character.unit))].sort(
   (a, b) => unitOrder.indexOf(a) - unitOrder.indexOf(b),
 );
