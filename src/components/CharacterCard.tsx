@@ -100,7 +100,7 @@ export default function CharacterCard({ character, rank, percentage, showDimensi
               const label = t(labelKey);
               return (
                 <div key={key} className="flex items-center gap-2 text-xs">
-                  <span className="w-16 text-stone-gray dark:text-warm-silver shrink-0">{label}</span>
+                  <span className="w-20 text-stone-gray dark:text-warm-silver shrink-0">{label}</span>
                   <div
                     className="flex-1 h-1.5 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden"
                     role="meter"

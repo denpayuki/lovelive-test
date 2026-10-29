@@ -227,8 +227,11 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
                 const label = t(dimLabelKeys[dim.key]);
                 return (
                   <div key={dim.key} className="flex items-center gap-3">
-                    <span className="w-20 text-sm text-olive-gray dark:text-warm-silver shrink-0">{label}</span>
-                    <div className="flex-1 h-2 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden">
+                    <span className="w-28 sm:w-40 text-sm text-olive-gray dark:text-warm-silver shrink-0">
+                      <span className="sm:hidden">{t(dimShortKeys[dim.key])}</span>
+                      <span className="hidden sm:inline">{label}</span>
+                    </span>
+                    <div className="min-w-0 flex-1 h-2 bg-border-cream dark:bg-dark-warm rounded-full overflow-hidden">
                       <div
                         className="h-full bg-terracotta rounded-full transition-all duration-500"
                         style={{ width: `${displayedUserScores[dim.key] * 10}%`, opacity: 0.7 + (displayedUserScores[dim.key] / 10) * 0.3 }}
