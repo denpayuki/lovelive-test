@@ -9,13 +9,13 @@ export const characters: CharacterProfile[] = [
     unit: "μ's",
     color: "#FF8C00",
     scores: {
-      energy: 10, //
+      energy: 10, 
       warmth: 8,
       drive: 10, 
-      discipline: 4, //true 
+      discipline: 4, //
       creativity: 6,
-      confidence: 8,
-      optimism: 10, //true
+      confidence: 7,
+      optimism: 10, //
       independence: 6,
     },
     imageUrl: "/sprite/honoka.webp",
@@ -47,11 +47,11 @@ export const characters: CharacterProfile[] = [
     scores: {
       energy: 3,
       warmth: 7,
-      drive: 8, //true
-      discipline: 10, //
+      drive: 8, //
+      discipline: 10, 
       creativity: 5,
       confidence: 7,
-      optimism: 3, //too low?
+      optimism: 5, //
       independence: 6,
     },
     imageUrl: "/sprite/umi.webp",
@@ -100,13 +100,13 @@ export const characters: CharacterProfile[] = [
     color: "#FF0000",
     scores: {
       energy: 4,
-      warmth: 5, //
-      drive: 8, //true
+      warmth: 5, 
+      drive: 8, //
       discipline: 7,
-      creativity: 9, //true!
+      creativity: 9, 
       confidence: 6,
       optimism: 5,
-      independence: 10, //true!
+      independence: 10, 
     },
     imageUrl: "/sprite/maki.webp",
   },
@@ -119,10 +119,10 @@ export const characters: CharacterProfile[] = [
     scores: {
       energy: 8,
       warmth: 6,
-      drive: 10, //true
-      discipline: 8, //true
+      drive: 10, //
+      discipline: 8, //
       creativity: 8,
-      confidence: 10, //true? high?
+      confidence: 9, //
       optimism: 7,
       independence: 8,
     },
@@ -208,11 +208,11 @@ export const characters: CharacterProfile[] = [
     unit: "Aqours",
     color: "#FF69B4",
     scores: {
-      energy: 3, //true? 
-      warmth: 8, //true
+      energy: 3, //
+      warmth: 8, //
       drive: 7,
       discipline: 6,
-      creativity: 8, //true
+      creativity: 8, //
       confidence: 6,
       optimism: 6,
       independence: 7,
@@ -226,12 +226,12 @@ export const characters: CharacterProfile[] = [
     unit: "Aqours",
     color: "#FFD700",
     scores: {
-      energy: 4, //true
-      warmth: 9, //true
-      drive: 4, //
+      energy: 4, //
+      warmth: 9, //
+      drive: 4, 
       discipline: 6,
       creativity: 7,
-      confidence: 4, //true
+      confidence: 4, //
       optimism: 7,
       independence: 4,
     },
@@ -373,11 +373,11 @@ export const characters: CharacterProfile[] = [
     unit: "Nijigasaki",
     color: "#3FA9F5",
     scores: {
-      energy: 4, //
+      energy: 3, 
       warmth: 7,
       drive: 6,
-      discipline: 8, //true
-      creativity: 8, //
+      discipline: 8, //
+      creativity: 8, 
       confidence: 5,  
       optimism: 6,
       independence: 6,
@@ -464,12 +464,12 @@ export const characters: CharacterProfile[] = [
     color: "#7BD33C",
     scores: {
       energy: 5,
-      warmth: 10, //true
+      warmth: 10, //
       drive: 5,
       discipline: 5,
-      creativity: 6, //too low?
+      creativity: 7, 
       confidence: 6,
-      optimism: 9, //true
+      optimism: 9, //
       independence: 4, 
     },
     imageUrl: "/sprite/emma.webp",
@@ -518,13 +518,13 @@ export const characters: CharacterProfile[] = [
     color: "#C0C0C0",
     scores: {
       energy: 4,
-      warmth: 5, //
-      drive: 8, //true
+      warmth: 5, 
+      drive: 8, //
       discipline: 6,
-      creativity: 9, //true!
+      creativity: 9, 
       confidence: 6,
-      optimism: 5, //too low?
-      independence: 10, //
+      optimism: 5, //
+      independence: 10, 
     },
     imageUrl: "/sprite/mia.webp",
   },
@@ -610,13 +610,13 @@ export const characters: CharacterProfile[] = [
     color: "#9B59B6",
     scores: {
       energy: 7,
-      warmth: 6, //
-      drive: 9, //true
+      warmth: 6, 
+      drive: 9, //
       discipline: 7,
       creativity: 8,
-      confidence: 10, //true
+      confidence: 10, //
       optimism: 7,
-      independence: 8, //true
+      independence: 8, //
     },
     imageUrl: "/sprite/sumire.webp",
   },
@@ -627,10 +627,10 @@ export const characters: CharacterProfile[] = [
     unit: "Liella!",
     color: "#2C3E50",
     scores: {
-      energy: 4, //
-      warmth: 8, //too low?
-      drive: 8, //true
-      discipline: 10, //
+      energy: 4, 
+      warmth: 8, 
+      drive: 8, //
+      discipline: 10, 
       creativity: 6,
       confidence: 7,
       optimism: 6,
@@ -682,13 +682,13 @@ export const characters: CharacterProfile[] = [
     color: "#1ABC9C",
     scores: {
       energy: 4,
-      warmth: 3, //too low?
+      warmth: 5, //
       drive: 7,
-      discipline: 9, //true
-      creativity: 10, //true!
+      discipline: 9, //
+      creativity: 10, 
       confidence: 7,
-      optimism: 3, //too low?
-      independence: 9, //true
+      optimism: 5, //
+      independence: 9, //
     },
     imageUrl: "/sprite/shiki.webp",
   },
@@ -756,13 +756,13 @@ export const characters: CharacterProfile[] = [
     unit: "Hasunosora",
     color: "#F39A3C",
     scores: {
-      energy: 10, //
+      energy: 10, 
       warmth: 8,
-      drive: 9, //true
-      discipline: 4, //too low?
+      drive: 9, //
+      discipline: 4, //
       creativity: 7,
       confidence: 7,
-      optimism: 9, //true
+      optimism: 9, //
       independence: 6,
     },
     imageUrl: "/sprite/kaho.png",
@@ -902,9 +902,9 @@ export const characters: CharacterProfile[] = [
     scores: {
       energy: 5,
       warmth: 6,
-      drive: 7, //too low?
-      discipline: 7, //too low?
-      creativity: 9, //true
+      drive: 7, //
+      discipline: 9, //
+      creativity: 9, //
       confidence: 7,
       optimism: 6,
       independence: 7,
@@ -1049,11 +1049,11 @@ export const characters: CharacterProfile[] = [
     scores: {
       energy: 4,
       warmth: 7,
-      drive: 7, //too high?
+      drive: 6, //
       discipline: 6,
       creativity: 8,
       confidence: 4, //
-      optimism: 5, //too low?
+      optimism: 5, //
       independence: 7,
     },
     imageUrl: "/sprite/noriko.png",
@@ -1122,11 +1122,11 @@ export const characters: CharacterProfile[] = [
       energy: 5,
       warmth: 5,
       drive: 6,
-      discipline: 4, //too low?
-      creativity: 8, //
-      confidence: 6, //
+      discipline: 6, //
+      creativity: 8, 
+      confidence: 5, 
       optimism: 5,
-      independence: 8, //
+      independence: 8, 
     },
     imageUrl: "/sprite/shion.png",
   },
