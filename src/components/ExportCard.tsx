@@ -25,6 +25,10 @@ const ExportCard = forwardRef<HTMLDivElement, ExportCardProps>(function ExportCa
 ) {
   const [imgError, setImgError] = useState(false);
   const imageSrc = characterImageDataUrl || character.imageUrl;
+  const headlineLength = nickname.length + headlineSuffix.length;
+  const headlineFontSize = headlineLength > 42 ? 28 : headlineLength > 32 ? 34 : 40;
+  const characterNameFontSize = character.name.length > 18 ? 22 : 28;
+  const similarityFontSize = similarityText.length > 64 ? 18 : 22;
 
   // Reset error state when image source changes (e.g. data URL becomes available)
   useEffect(() => {
@@ -65,7 +69,7 @@ const ExportCard = forwardRef<HTMLDivElement, ExportCardProps>(function ExportCa
         </div>
 
         {/* Headline */}
-        <div style={{ fontSize: '40px', fontWeight: 500, color: '#141413', lineHeight: 1.20, marginBottom: '32px' }}>
+        <div style={{ fontSize: `${headlineFontSize}px`, fontWeight: 500, color: '#141413', lineHeight: 1.15, marginBottom: '24px', overflowWrap: 'anywhere' }}>
           <span style={{ color: '#b83f6d' }}>{nickname}</span>
           <span> {headlineSuffix}</span>
         </div>
@@ -99,7 +103,7 @@ const ExportCard = forwardRef<HTMLDivElement, ExportCardProps>(function ExportCa
                 <span style={{ fontSize: '64px', color: '#141413' }}>{character.name.charAt(0)}</span>
               )}
             </div>
-            <div style={{ marginTop: '16px', fontSize: '28px', fontWeight: 500, color: '#b83f6d' }}>
+            <div style={{ width: '340px', marginTop: '16px', fontSize: `${characterNameFontSize}px`, fontWeight: 500, color: '#b83f6d', textAlign: 'center', overflowWrap: 'anywhere' }}>
               {character.name}
             </div>
           </div>
@@ -114,11 +118,13 @@ const ExportCard = forwardRef<HTMLDivElement, ExportCardProps>(function ExportCa
                 return (
                   <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                     <span style={{
-                      width: '112px',
-                      fontSize: '17px',
+                      fontSize: '15px',
                       color: '#5e5d59',
                       flexShrink: 0,
+                      width: '132px',
                       textAlign: 'right',
+                      lineHeight: 1.15,
+                      overflowWrap: 'anywhere',
                       fontFamily: "system-ui, -apple-system, 'Segoe UI', sans-serif",
                       fontWeight: 400,
                     }}>
@@ -156,7 +162,7 @@ const ExportCard = forwardRef<HTMLDivElement, ExportCardProps>(function ExportCa
 
             {/* Similarity text */}
             <div style={{ marginTop: '24px' }}>
-              <div style={{ fontSize: '22px', fontWeight: 500, color: '#141413', lineHeight: 1.40 }}>
+              <div style={{ fontSize: `${similarityFontSize}px`, fontWeight: 500, color: '#141413', lineHeight: 1.35, overflowWrap: 'anywhere' }}>
                 {(() => {
                   const pctStr = `${percentage}%`;
                   const idx = similarityText.indexOf(pctStr);

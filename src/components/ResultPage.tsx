@@ -66,7 +66,7 @@ export default function ResultPage({ results, answers, confirmingReset, onConfir
   const exportCardRef = useRef<HTMLDivElement>(null);
 
   const userLabel = t('result.radarUser');
-  const dimensionLabels = dimensionOrder.map((key) => t(dimLabelKeys[key]));
+  const dimensionLabels = dimensionOrder.map((key) => t(dimShortKeys[key]));
 
   const handleExportConfirm = useCallback(async (nickname: string) => {
     setNicknameModalOpen(false);
