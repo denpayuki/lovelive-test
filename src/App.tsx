@@ -10,11 +10,20 @@ import DisclaimerModal from './components/DisclaimerModal';
 
 function TopBar() {
   const [disclaimerOpen, setDisclaimerOpen] = useState(false);
-  const { t } = useLocale();
+  const { t, locale, setLocale } = useLocale();
 
   return (
     <>
-      <nav aria-label="Site navigation" className="fixed top-4 right-4 z-50 flex items-center gap-2">
+      <nav aria-label={t('topbar.nav')} className="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <button
+          onClick={() => setLocale(locale === 'en' ? 'ru' : 'en')}
+          aria-label={locale === 'en' ? t('language.switchToRussian') : t('language.switchToEnglish')}
+          className="w-11 h-11 rounded-full flex items-center justify-center cursor-pointer bg-warm-sand dark:bg-dark-surface text-charcoal-warm dark:text-warm-silver transition-colors hover:opacity-80 text-xs font-semibold"
+          style={{ boxShadow: 'var(--btn-secondary-ring)' }}
+        >
+          {locale === 'en' ? 'RU' : 'EN'}
+        </button>
+
         {/* Disclaimer button */}
         <button
           onClick={() => setDisclaimerOpen(true)}

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { CharacterProfile, DimensionKey } from '../types';
 import { useLocale } from '../i18n';
 import type { TranslationKey } from '../i18n';
-import { characterDescriptions } from '../i18n/description';
+import { characterDescriptions, characterDescriptionsRu } from '../i18n/description';
 
 interface CharacterCardProps {
   character: CharacterProfile;
@@ -24,8 +24,10 @@ const dimensionKeys: { key: DimensionKey; labelKey: TranslationKey }[] = [
 
 export default function CharacterCard({ character, rank, percentage, showDimensions }: CharacterCardProps) {
   const [imgError, setImgError] = useState(false);
-  const { t } = useLocale();
-  const description = characterDescriptions[character.id];
+  const { t, locale } = useLocale();
+  const description = locale === 'ru'
+    ? characterDescriptionsRu[character.id]
+    : characterDescriptions[character.id];
 
   return (
     <div

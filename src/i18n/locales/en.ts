@@ -82,6 +82,9 @@ const en = {
 
   // Top bar
   'topbar.about': 'About this project',
+  'topbar.nav': 'Site navigation',
+  'language.switchToEnglish': 'Switch language to English',
+  'language.switchToRussian': 'Switch language to Russian',
 
   // Progress bar
   'progress.aria': 'Completed {current} / {total} questions',

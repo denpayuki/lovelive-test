@@ -41,6 +41,7 @@ export interface Question {
   id: number;
   text: {
     en: string;
+    ru: string;
   };
   dimension: DimensionKey;
   reversed: boolean;
